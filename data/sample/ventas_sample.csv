@@ -1,0 +1,101 @@
+fecha,producto,unidades,precio_unitario,total
+2025-01-01,Bolsa Basura Todos Tamanios,41,48.0,1968.0
+2025-01-01,Bolsa Rollo Poliseda,33,38.0,1254.0
+2025-01-01,Bolsa Rollo Baja Densidad,45,35.0,1575.0
+2025-01-01,Bolsa Rollo Alta Densidad,43,42.0,1806.0
+2025-01-01,Bolsa Negra Camiseta,47,45.0,2115.0
+2025-01-01,Bolsa Camiseta Poliseda,40,40.0,1600.0
+2025-01-01,Bolsa Camiseta Plata,31,44.0,1364.0
+2025-01-01,Bolsa Camiseta Color,33,42.0,1386.0
+2025-01-01,Charolas Desechables,10,65.0,650.0
+2025-01-01,Vasos Desechables,14,55.0,770.0
+2025-01-01,Contenedor Termico Unicel,9,72.0,648.0
+2025-01-01,Pelicula Plastica Emplaye,16,85.0,1360.0
+2025-01-02,Bolsa Basura Todos Tamanios,31,48.0,1488.0
+2025-01-02,Bolsa Rollo Poliseda,20,38.0,760.0
+2025-01-02,Bolsa Rollo Baja Densidad,26,35.0,910.0
+2025-01-02,Bolsa Rollo Alta Densidad,27,42.0,1134.0
+2025-01-02,Bolsa Negra Camiseta,33,45.0,1485.0
+2025-01-02,Bolsa Camiseta Poliseda,34,40.0,1360.0
+2025-01-02,Bolsa Camiseta Plata,19,44.0,836.0
+2025-01-02,Bolsa Camiseta Color,20,42.0,840.0
+2025-01-02,Charolas Desechables,11,65.0,715.0
+2025-01-02,Vasos Desechables,10,55.0,550.0
+2025-01-02,Contenedor Termico Unicel,8,72.0,576.0
+2025-01-02,Pelicula Plastica Emplaye,10,85.0,850.0
+2025-01-03,Bolsa Basura Todos Tamanios,39,48.0,1872.0
+2025-01-03,Bolsa Rollo Poliseda,37,38.0,1406.0
+2025-01-03,Bolsa Rollo Baja Densidad,39,35.0,1365.0
+2025-01-03,Bolsa Rollo Alta Densidad,41,42.0,1722.0
+2025-01-03,Bolsa Negra Camiseta,48,45.0,2160.0
+2025-01-03,Bolsa Camiseta Poliseda,43,40.0,1720.0
+2025-01-03,Bolsa Camiseta Plata,27,44.0,1188.0
+2025-01-03,Bolsa Camiseta Color,40,42.0,1680.0
+2025-01-03,Charolas Desechables,12,65.0,780.0
+2025-01-03,Vasos Desechables,12,55.0,660.0
+2025-01-03,Contenedor Termico Unicel,12,72.0,864.0
+2025-01-03,Pelicula Plastica Emplaye,16,85.0,1360.0
+2025-01-04,Bolsa Basura Todos Tamanios,23,48.0,1104.0
+2025-01-04,Bolsa Rollo Poliseda,15,38.0,570.0
+2025-01-04,Bolsa Rollo Baja Densidad,21,35.0,735.0
+2025-01-04,Bolsa Rollo Alta Densidad,21,42.0,882.0
+2025-01-04,Bolsa Negra Camiseta,30,45.0,1350.0
+2025-01-04,Bolsa Camiseta Poliseda,24,40.0,960.0
+2025-01-04,Bolsa Camiseta Plata,15,44.0,660.0
+2025-01-04,Bolsa Camiseta Color,17,42.0,714.0
+2025-01-04,Charolas Desechables,10,65.0,650.0
+2025-01-04,Vasos Desechables,6,55.0,330.0
+2025-01-04,Contenedor Termico Unicel,5,72.0,360.0
+2025-01-04,Pelicula Plastica Emplaye,12,85.0,1020.0
+2025-01-05,Bolsa Basura Todos Tamanios,23,48.0,1104.0
+2025-01-05,Bolsa Rollo Poliseda,15,38.0,570.0
+2025-01-05,Bolsa Rollo Baja Densidad,25,35.0,875.0
+2025-01-05,Bolsa Rollo Alta Densidad,20,42.0,840.0
+2025-01-05,Bolsa Negra Camiseta,26,45.0,1170.0
+2025-01-05,Bolsa Camiseta Poliseda,26,40.0,1040.0
+2025-01-05,Bolsa Camiseta Plata,17,44.0,748.0
+2025-01-05,Bolsa Camiseta Color,19,42.0,798.0
+2025-01-05,Charolas Desechables,5,65.0,325.0
+2025-01-05,Vasos Desechables,7,55.0,385.0
+2025-01-05,Contenedor Termico Unicel,6,72.0,432.0
+2025-01-05,Pelicula Plastica Emplaye,12,85.0,1020.0
+2025-01-06,Bolsa Basura Todos Tamanios,38,48.0,1824.0
+2025-01-06,Bolsa Rollo Poliseda,34,38.0,1292.0
+2025-01-06,Bolsa Rollo Baja Densidad,38,35.0,1330.0
+2025-01-06,Bolsa Rollo Alta Densidad,32,42.0,1344.0
+2025-01-06,Bolsa Negra Camiseta,55,45.0,2475.0
+2025-01-06,Bolsa Camiseta Poliseda,49,40.0,1960.0
+2025-01-06,Bolsa Camiseta Plata,27,44.0,1188.0
+2025-01-06,Bolsa Camiseta Color,35,42.0,1470.0
+2025-01-06,Charolas Desechables,12,65.0,780.0
+2025-01-06,Vasos Desechables,12,55.0,660.0
+2025-01-06,Contenedor Termico Unicel,11,72.0,792.0
+2025-01-06,Pelicula Plastica Emplaye,21,85.0,1785.0
+2025-01-07,Bolsa Basura Todos Tamanios,30,48.0,1440.0
+2025-01-07,Bolsa Rollo Poliseda,32,38.0,1216.0
+2025-01-07,Bolsa Rollo Baja Densidad,23,35.0,805.0
+2025-01-07,Bolsa Rollo Alta Densidad,31,42.0,1302.0
+2025-01-07,Bolsa Negra Camiseta,38,45.0,1710.0
+2025-01-07,Bolsa Camiseta Poliseda,31,40.0,1240.0
+2025-01-07,Bolsa Camiseta Plata,21,44.0,924.0
+2025-01-07,Bolsa Camiseta Color,18,42.0,756.0
+2025-01-07,Charolas Desechables,8,65.0,520.0
+2025-01-07,Vasos Desechables,11,55.0,605.0
+2025-01-07,Contenedor Termico Unicel,11,72.0,792.0
+2025-01-07,Pelicula Plastica Emplaye,12,85.0,1020.0
+2025-01-08,Bolsa Basura Todos Tamanios,35,48.0,1680.0
+2025-01-08,Bolsa Rollo Poliseda,32,38.0,1216.0
+2025-01-08,Bolsa Rollo Baja Densidad,47,35.0,1645.0
+2025-01-08,Bolsa Rollo Alta Densidad,37,42.0,1554.0
+2025-01-08,Bolsa Negra Camiseta,45,45.0,2025.0
+2025-01-08,Bolsa Camiseta Poliseda,43,40.0,1720.0
+2025-01-08,Bolsa Camiseta Plata,27,44.0,1188.0
+2025-01-08,Bolsa Camiseta Color,33,42.0,1386.0
+2025-01-08,Charolas Desechables,9,65.0,585.0
+2025-01-08,Vasos Desechables,13,55.0,715.0
+2025-01-08,Contenedor Termico Unicel,9,72.0,648.0
+2025-01-08,Pelicula Plastica Emplaye,14,85.0,1190.0
+2025-01-09,Bolsa Basura Todos Tamanios,31,48.0,1488.0
+2025-01-09,Bolsa Rollo Poliseda,27,38.0,1026.0
+2025-01-09,Bolsa Rollo Baja Densidad,33,35.0,1155.0
+2025-01-09,Bolsa Rollo Alta Densidad,28,42.0,1176.0
