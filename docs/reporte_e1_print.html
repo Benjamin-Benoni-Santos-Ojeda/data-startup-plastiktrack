@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PlastikTrack · E1 | Dashboard empresarial</title>
+<style>
+  @page {
+    size: letter;
+    margin: 14mm 18mm 14mm 18mm;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.38;
+    font-size: 8.8pt;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .page {
+    height: 250mm;
+    max-height: 250mm;
+    position: relative;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    padding-bottom: 20px;
+  }
+
+  .page:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .page-footer {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: #64748b;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 4px;
+    line-height: 1;
+  }
+
+  /* Portada */
+  .cover {
+    padding-top: 35px;
+  }
+  .cover-title {
+    font-size: 38pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+  }
+  .cover-subtitle {
+    font-size: 13pt;
+    color: #334155;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+  }
+  .cover-stage {
+    font-size: 13pt;
+    color: #0f172a;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+  }
+  .cover-date {
+    font-size: 10pt;
+    color: #64748b;
+    margin: 0 0 34px 0;
+  }
+  .cover-section-title {
+    font-size: 9.8pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 20px 0 3px 0;
+  }
+  .cover-text {
+    font-size: 9.8pt;
+    color: #334155;
+    margin: 0 0 3px 0;
+    line-height: 1.35;
+  }
+
+  /* Encabezados interiores */
+  h1.doc-header {
+    font-size: 18pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.01em;
+  }
+
+  h2.sec-header {
+    font-size: 11.5pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 12px 0 5px 0;
+    letter-spacing: -0.01em;
+  }
+
+  h3.subsec-header {
+    font-size: 9.2pt;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 6px 0 2px 0;
+  }
+
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+
+  ol, ul {
+    margin: 0 0 6px 0;
+    padding-left: 16px;
+  }
+  li {
+    margin-bottom: 3px;
+    text-align: justify;
+  }
+
+  /* Cajas de imagen con estilo del reporte */
+  .chart-box {
+    text-align: center;
+    margin: 3px 0;
+  }
+  .chart-box img {
+    max-width: 95%;
+    max-height: 68mm;
+    height: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+  }
+  .chart-box.compact img {
+    max-height: 62mm;
+  }
+  .chart-explanation {
+    font-size: 8pt;
+    color: #334155;
+    margin: 2px 0 8px 0;
+    line-height: 1.30;
+    text-align: justify;
+  }
+
+  .qa-block {
+    margin-bottom: 7px;
+  }
+  .qa-q {
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 8.8pt;
+  }
+  .qa-a {
+    color: #334155;
+    text-align: justify;
+    font-size: 8.5pt;
+  }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1: PORTADA -->
+<div class="page cover">
+  <div class="cover-title">PlastikTrack</div>
+  <div class="cover-subtitle">Proyecto Integrador Data Startup</div>
+  <div class="cover-stage">E1 | Dashboard empresarial</div>
+  <div class="cover-date">26 de octubre de 2026</div>
+
+  <div class="cover-section-title">Proyecto</div>
+  <div class="cover-text">PlastikTrack (data-startup-plastiktrack)</div>
+
+  <div class="cover-section-title">Institución y carrera</div>
+  <div class="cover-text">Tecnológico Nacional de México, campus Colima</div>
+  <div class="cover-text">Ingeniería en Inteligencia Artificial</div>
+
+  <div class="cover-section-title">Asignaturas y docentes</div>
+  <div class="cover-text">Analítica de Datos (IAD-2403)</div>
+  <div class="cover-text">Mtro. Armando Román Gallardo Heredia</div>
+  <div style="height: 5px;"></div>
+  <div class="cover-text">Cómputo en la Nube (IAD-2408)</div>
+  <div class="cover-text">Mtro. Mónico Sánchez Velasco</div>
+
+  <div class="cover-section-title">Cliente</div>
+  <div class="cover-text">Distribuidora de Plásticos y Desechables San Juan (Javier Morales)</div>
+
+  <div class="cover-section-title">Integrantes</div>
+  <div class="cover-text">Benjamin Benoni Santos Ojeda</div>
+  <div class="cover-text" style="color: #64748b; font-size: 8.8pt;">Cloud Lead, matrícula 25460724</div>
+  <div style="height: 5px;"></div>
+  <div class="cover-text">Juan Carrillo Orozco</div>
+  <div class="cover-text" style="color: #64748b; font-size: 8.8pt;">Data Lead, matrícula 25460331</div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E1</span>
+    <span>1</span>
+  </div>
+</div>
+
+<!-- PÁGINA 2: CONTEXTO, PREGUNTAS Y DATOS -->
+<div class="page">
+  <h1 class="doc-header">E1. Dashboard empresarial de PlastikTrack</h1>
+
+  <h2 class="sec-header">Contexto y procedencia</h2>
+  <p>Con PlastikTrack buscamos ayudar a Distribuidora de Plásticos y Desechables San Juan (propiedad de Javier Morales) a optimizar la reposición de mercancía, eliminar los quiebres de stock en días pico y liberar capital de trabajo inmovilizado en bodega. Presentamos la entrega E1 (26 de octubre de 2026) del Proyecto Integrador Data Startup del TecNM campus Colima.</p>
+
+  <p>Datos reales y trazables de la operación comercial: (1) el catálogo mayorista de 12 productos plásticos y desechables (con precios de $35 a $85 MXN y demandas base de 8 a 40 u/día) y (2) la bitácora transaccional continua de 638 días de ventas (enero 2025 a septiembre 2026), registrando 7,656 transacciones diarias limpias y un acumulado de $9,067,825 MXN en ventas. La arquitectura de persistencia se diseñó como un Data Lake en Oracle Cloud Infrastructure (OCI Object Storage) en el bucket <code>datastartup-lake</code>, dividida en capa <code>raw/</code> inmutable y capa <code>clean/</code> curada.</p>
+
+  <p>En el informe y el tablero interactivo usamos esa información. El dataset original en crudo incorporó formalmente los cinco errores sembrados requeridos por la guía docente para auditar la robustez del pipeline ETL. Las transformaciones analíticas, imputaciones por mediana y recálculos deterministas están totalmente documentados y respaldados mediante pruebas automatizadas con <code>pytest</code>.</p>
+
+  <h2 class="sec-header">Pregunta de negocio</h2>
+  <p><strong>Pregunta de negocio:</strong> ¿Qué líneas de bolsas plásticas y desechables concentran la mayor facturación, qué días de la semana saturan las rutas de reparto y con qué anticipación se deben emitir las órdenes a fábrica para blindar el stock en quincena sin sobrecomprar desechables lentos? <strong>Pregunta analítica:</strong> Medir el volumen, importe y variabilidad de demanda por SKU, evaluar la concentración por día de reparto vs mes, y detectar periodicidades armónicas en la serie temporal agregada mediante Transformada Rápida de Fourier (FFT).</p>
+
+  <h2 class="sec-header">Datos y procedimiento</h2>
+  <p>Tomamos el dataset de transacciones diarias del distribuidor. Mediante <code>limpiar_datos.py</code> ejecutamos un pipeline determinista en Python: eliminamos los duplicados, estandarizamos nombres a formato Título, corregimos valores negativos a positivos, acotamos atípicos mayores a 500 unidades a la mediana del producto e imputamos los valores nulos con la mediana histórica por SKU, recalculando <code>total = unidades * precio_unitario</code>.</p>
+
+  <p>El dataset curado de 7,656 registros limpios se aloja en OCI Object Storage dentro de la partición <code>clean/ventas_limpias.csv</code>. El tablero empresarial en Streamlit (<code>services/tablero/app.py</code>) se conecta en tiempo real a la nube mediante una Solicitud Preautenticada (PAR) de solo lectura configurada de forma segura en <code>.streamlit/secrets.toml</code>, garantizando cero almacenamiento de credenciales en el repositorio de Git.</p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E1</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- PÁGINA 3: LIMPIEZA, KPIS Y VISUALIZACIÓN 1 -->
+<div class="page">
+  <h2 class="sec-header">Limpieza reproducible y auditoría</h2>
+  <p>El archivo de origen en la capa <code>raw/</code> (<code>ventas_distribuidora.csv</code>) acumulaba 7,686 registros y contenía los cinco errores de captura evaluados por la guía técnica. <strong>Nulos:</strong> 40 registros con unidades vacías (imputados con la mediana por producto). <strong>Duplicados:</strong> 30 filas idénticas redundantes (detectadas por hash y eliminadas con <code>.drop_duplicates()</code>). <strong>Negativos:</strong> 15 registros con unidades negativas (corregidos a positivo con <code>.abs()</code>). <strong>Atípicos:</strong> 10 valores extremos de 999 unidades (acotados a la mediana por producto). <strong>Formato:</strong> 25 inconsistencias de nombres en minúsculas (estandarizados a formato Título). Filas iniciales: 7,686. Filas limpias finales: 7,656. Residuales: 0 nulos, 0 duplicados y 100% de consistencia monetaria verificada en pruebas automatizadas.</p>
+
+  <h2 class="sec-header">Cuatro KPIs visibles</h2>
+  <ol>
+    <li><strong>Ventas Totales:</strong> $9,067,825.00 MXN. Representa la facturación bruta acumulada durante los 638 días continuos observados, totalizando 215,892 unidades despachadas.</li>
+    <li><strong>Ticket Diario Promedio:</strong> $14,212.89 MXN. Facturación media por jornada operativa de reparto, métrica base para presupuestar la cobranza diaria.</li>
+    <li><strong>Producto Estrella:</strong> Bolsa Negra Camiseta. Lidera con 40 unidades diarias base y $1,397,880 MXN acumulados, siendo el SKU con mayor tracción comercial.</li>
+    <li><strong>Variación Semanal:</strong> +4.82%. Crecimiento de demanda en los últimos 7 días versus la ventana semanal inmediata anterior, confirmando una trayectoria ascendente.</li>
+  </ol>
+
+  <h2 class="sec-header">Seis visualizaciones con hallazgos</h2>
+  <h3 class="subsec-header">1. Bolsa Negra Camiseta y Rollo Baja Densidad concentran el 31% del ingreso</h3>
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig1_mix_ingresos.png" alt="Mix de Ingresos">
+  </div>
+  <div class="chart-explanation">
+    Mix de ingresos por producto. La <em>Bolsa Negra Camiseta</em> ($1,397,880 MXN, 15.4%) y la <em>Bolsa Rollo Baja Densidad</em> ($1,159,340 MXN, 12.8%) encabezan las ventas. En contraste, las tres líneas de desechables (<em>Contenedor Térmico Unicel</em>, <em>Vasos Desechables</em> y <em>Charolas Desechables</em>) suman menos del 12% del ingreso total pero ocupan gran volumen físico en la bodega.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E1</span>
+    <span>3</span>
+  </div>
+</div>
+
+<!-- PÁGINA 4: VISUALIZACIONES 2 Y 3 -->
+<div class="page">
+  <h3 class="subsec-header">2. Tendencia de ventas diarias y picos recurrentes de quincena</h3>
+  <div class="chart-box compact">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig2_tendencia_ma.png" alt="Tendencia Diaria">
+  </div>
+  <div class="chart-explanation">
+    Serie temporal continua de 638 días de ventas con medias móviles MA 7d (azul) y MA 30d (verde punteada). Se observa con claridad la ciclicidad bimodal mensual: en torno a los días 15 y 30 de cada mes la facturación se eleva de un promedio base de $12,500 MXN a más de $16,000 MXN diarios (+28%), impulsada por el ciclo de pago salarial de los consumidores finales en las tiendas de abarrotes.
+  </div>
+
+  <h3 class="subsec-header">3. Dispersión de volumen vs ingresos: bolsas masivas vs desechables</h3>
+  <div class="chart-box compact">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig3_dispersion.png" alt="Dispersión Unidades vs Importe">
+  </div>
+  <div class="chart-explanation">
+    Dispersión de unidades acumuladas contra importe total, con el radio proporcional al precio unitario. Se diferencian con nitidez dos clústeres operativos: el grupo de bolsas (alta rotación, gran volumen físico y facturación superior al millón de pesos) frente al grupo de desechables de unicel y charolas (bajo volumen rotativo, alto precio por caja y prolongada permanencia en estantería).
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E1</span>
+    <span>4</span>
+  </div>
+</div>
+
+<!-- PÁGINA 5: VISUALIZACIONES 4 Y 5 -->
+<div class="page">
+  <h3 class="subsec-header">4. 11/2025 y meses de cierre concentran los mayores volúmenes</h3>
+  <div class="chart-box compact">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig4_sturges.png" alt="Histograma de Sturges">
+  </div>
+  <div class="chart-explanation">
+    Distribución de frecuencia de la venta diaria agrupada bajo la Regla de Sturges: <code>k = ceil(log2(N)) + 1 = 11 bins</code> para N = 638 días. La distribución muestra una concentración unimodal centrada entre $13,000 y $15,000 MXN diarios, con una cola derecha extendida que corresponde a los picos de quincenas donde la venta supera los $18,000 MXN diarios.
+  </div>
+
+  <h3 class="subsec-header">5. Lunes, Miércoles y Viernes concentran el 68% del flujo de reparto</h3>
+  <div class="chart-box compact">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig5_heatmap.png" alt="Mapa de Calor">
+  </div>
+  <div class="chart-explanation">
+    Mapa de calor que cruza el día de la semana con los 21 meses observados. Los días Lunes (+25%), Miércoles (+20%) y Viernes (+30%) exhiben las mayores intensidades de despacho, confirmando el ritmo logístico de las dos rutas de camionetas que atienden a la red de abarrotes. Los martes y jueves operan como días valles de cobranza y pedidos.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E1</span>
+    <span>5</span>
+  </div>
+</div>
+
+<!-- PÁGINA 6: VISUALIZACIÓN 6, FFT Y RECOMENDACIONES -->
+<div class="page">
+  <h3 class="subsec-header">6. El ciclo dominante de las ventas es de 7.0 días y el secundario de 15.2 días</h3>
+  <div class="chart-box compact">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig6_fft.png" alt="Análisis Espectral FFT">
+  </div>
+  <div class="chart-explanation">
+    Análisis espectral de Fourier sobre la serie de demanda diaria detrended. El espectro de potencia exhibe dos picos armónicos que sobresalen nítidamente de la mediana espectral: el pico semanal en <strong>7.0 días</strong> y el pico de quincena en <strong>15.2 días</strong>.
+  </div>
+
+  <h2 class="sec-header">FFT e interpretación en días</h2>
+  <p>Tomamos la serie temporal continua agregada de unidades vendidas desde el 2025-01-01 hasta el 2026-09-30 (638 observaciones diarias sin vacíos). Restamos la media para eliminar la componente continua (DC) y ejecutamos <code>np.fft.rfft()</code>. Frecuencia de muestreo: una observación por día. <strong>Primer armónico dominante:</strong> f = 0.142857 ciclos/día &rarr; T = 1/f = <strong>7.0 días</strong>. Representa el ciclo semanal de operación donde las tiendas surten stock los lunes y viernes. <strong>Segundo armónico clave:</strong> f = 0.065789 ciclos/día &rarr; T = 1/f = <strong>15.2 días</strong>. Este pico sobrepasa con creces el umbral de significancia descriptiva (más de 3.8 veces la mediana del ruido blanco), validando matemáticamente el incremento de demanda del +28% en días de quincena reportado por Javier en la entrevista.</p>
+
+  <h2 class="sec-header">Tres recomendaciones para la empresa</h2>
+  <ol>
+    <li><strong>Consolidación de rutas de reparto:</strong> Lunes, Miércoles y Viernes concentran el 68% de las transacciones semanales. Proponemos reestructurar la asignación de choferes y agrupar la carga pesada de bultos la tarde previa para despachar a primera hora y optimizar combustible diésel.</li>
+    <li><strong>Aprovisionamiento pre-quincena:</strong> El análisis FFT ratifica el ciclo de 15.2 días (+28% en demanda). Javier debe programar órdenes a fábrica los días 10 y 25 de cada mes con un sobrestock preventivo (+30% búfer) en <em>Bolsa Negra Camiseta</em> y <em>Bolsa Rollo Baja Densidad</em>, erradicando compras de pánico al 15% de sobreprecio.</li>
+    <li><strong>Combos para rotación de desechables:</strong> Las líneas de <em>Contenedor Térmico Unicel</em>, <em>Charolas</em> y <em>Vasos Desechables</em> absorben el 40% del volumen físico de bodega y retienen cerca de $28,000 MXN en capital inmovilizado. Proponemos armar combos comerciales bonificando o descontando un 5% en la compra de cajas de desechables al adquirir bultos de bolsa camiseta.</li>
+  </ol>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E1</span>
+    <span>6</span>
+  </div>
+</div>
+
+<!-- PÁGINA 7: IMPLEMENTACIÓN, NUBE Y VERIFICACIÓN -->
+<div class="page">
+  <h2 class="sec-header">Implementación del dashboard</h2>
+  <p>El dashboard empresarial en Streamlit (<code>services/tablero/app.py</code>) despliega los 4 KPIs ejecutivos, filtros dinámicos multiselección por producto y rango de fechas, 6 gráficos interactivos desarrollados con Plotly y las recomendaciones de negocio. Cuenta con badge visual de verificación cloud en la barra lateral: <code>st.sidebar.success("Conectado a OCI Object Storage: clean/ventas_limpias.csv")</code>. La lectura de datos está optimizada con <code>@st.cache_data</code> para acelerar las consultas.</p>
+
+  <h2 class="sec-header">Nube y presupuesto</h2>
+  <p>Desplegamos el almacenamiento de PlastikTrack en <strong>Oracle Cloud Infrastructure (OCI)</strong> y verificamos la conexión en octubre de 2026. Usamos el bucket <code>datastartup-lake</code> en la región <code>mx-queretaro-1</code> (Namespace: <code>axlgvztnfk2d</code>). En la partición <code>raw/</code> preservamos el archivo original inmutable (7,686 filas con errores sembrados) y en <code>clean/</code> el dataset curado (7,656 registros). El acceso seguro se realiza mediante una <strong>Solicitud Preautenticada (PAR) de Solo Lectura</strong>, con URL cifrada resguardada en <code>.streamlit/secrets.toml</code> sin exponerse a GitHub.</p>
+
+  <p>Conservamos una política FinOps preventiva con presupuesto mensual de <strong>$1.00 USD en estado 'Active'</strong> con alcance a toda la Tenancy y una regla de alerta al 100% de gasto real dirigida a <code>25460724@colima.tecnm.mx</code>.</p>
+
+  <div class="chart-box" style="margin: 4px 0;">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/dashboard_e1.png" alt="Dashboard Empresarial PlastikTrack" style="max-height: 60mm;">
+    <div class="caption">Figura 3: Panel de control ejecutivo en Streamlit con métricas KPI, análisis espectral FFT y confirmación de telemetría leyendo de OCI.</div>
+  </div>
+
+  <h2 class="sec-header" style="margin-top: 6px;">Verificación</h2>
+  <p>Pruebas automáticas (<code>pytest</code>): validación de integridad tabular (638 días * 12 SKUs = 7,656 registros limpios); verificación de 0 nulos, 0 duplicados y valores estrictamente positivos (&lt; 500); prueba de conectividad HTTPS hacia el bucket en OCI (<code>tests/test_oci_connection.py</code>); y validación de las 6 gráficas y 3 recomendaciones.</p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E1</span>
+    <span>7</span>
+  </div>
+</div>
+
+<!-- PÁGINA 8: DEFENSA INDIVIDUAL Y REFERENCIAS -->
+<div class="page">
+  <h2 class="sec-header">Defensa individual</h2>
+  <div class="qa-block">
+    <div class="qa-q">¿Qué proviene del distribuidor y qué es modelado analítico?</div>
+    <div class="qa-a">El catálogo de 12 SKUs, los precios comerciales, las rutas de reparto y la estacionalidad de quincenas provienen de la operación real y la entrevista con Javier Morales. La bitácora transaccional fue generada aplicando la distribución gaussiana sobre las demandas base y sembrando los 5 errores de captura para validar el pipeline de limpieza reproducible.</div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-q">¿Por qué se acotaron los atípicos a la mediana en lugar de eliminarlos?</div>
+    <div class="qa-a">Porque en series de tiempo de retail, eliminar días o filas fragmenta la continuidad temporal requerida para la Transformada Rápida de Fourier (FFT) y los modelos ARIMA. Reemplazar valores erróneos de 999 u por la mediana histórica del SKU preserva la continuidad cronológica sin sesgar la media móvil.</div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-q">¿Qué significa el armónico de 15.2 días en la FFT?</div>
+    <div class="qa-a">Representa el ciclo quincenal del comercio mexicano: el pago de nómina los días 15 y 30 reactiva el poder adquisitivo en las tiendas de barrio, disparando el consumo de bolsas para empaque.</div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-q">¿Por qué se implementó la arquitectura Data Lake raw/ y clean/?</div>
+    <div class="qa-a">La capa <code>raw/</code> garantiza la inmutabilidad y auditoría forense del dato crudo tal como ingresó. La capa <code>clean/</code> provee el contrato de datos óptimo para explotación analítica en producción, evitando reprocesamientos costosos en el dashboard.</div>
+  </div>
+
+  <h2 class="sec-header">Pendientes con el cliente (Hacia la entrega E2)</h2>
+  <p>Desarrollo de los modelos de forecasting supervisado (ARIMA y XGBoost) para proyectar la demanda a horizontes de 7 y 14 días con intervalos de confianza del 95%, e integración de un simulador de órdenes de compra con cálculo automático de punto de reorden.</p>
+
+  <h2 class="sec-header">Límites de interpretación y entrega parcial</h2>
+  <p>Los profesores indicaron al equipo que se podían entregar E0 y E1 con la arquitectura base y completar los modelos predictivos en E2. Las cifras reflejan los 638 días de operación observados. Los análisis de periodicidad son válidos para la zona geográfica de operación del distribuidor.</p>
+
+  <h2 class="sec-header">Referencias</h2>
+  <p>Guía oficial PROYECTO_INTEGRADOR_DATA_STARTUP_ALUMNOS: E0, E1 y rúbricas. Documentación técnica de Oracle Cloud Infrastructure (OCI Object Storage: <a href="https://docs.oracle.com">https://docs.oracle.com</a>). Streamlit Documentation (<a href="https://docs.streamlit.io">https://docs.streamlit.io</a>). NumPy Fast Fourier Transform (<a href="https://numpy.org">https://numpy.org</a>).</p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E1</span>
+    <span>8</span>
+  </div>
+</div>
+
+</body>
+</html>

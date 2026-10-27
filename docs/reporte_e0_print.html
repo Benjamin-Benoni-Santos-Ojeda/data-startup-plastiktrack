@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PlastikTrack · E0 | Propuesta de negocio</title>
+<style>
+  @page {
+    size: letter;
+    margin: 14mm 18mm 14mm 18mm;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.40;
+    font-size: 9pt;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .page {
+    height: 250mm;
+    max-height: 250mm;
+    position: relative;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    padding-bottom: 22px;
+  }
+
+  .page:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .page-footer {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: #64748b;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 4px;
+    line-height: 1;
+  }
+
+  /* Portada */
+  .cover {
+    padding-top: 35px;
+  }
+  .cover-title {
+    font-size: 38pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+  }
+  .cover-subtitle {
+    font-size: 13pt;
+    color: #334155;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+  }
+  .cover-stage {
+    font-size: 13pt;
+    color: #0f172a;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+  }
+  .cover-date {
+    font-size: 10pt;
+    color: #64748b;
+    margin: 0 0 34px 0;
+  }
+  .cover-section-title {
+    font-size: 9.8pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 20px 0 3px 0;
+  }
+  .cover-text {
+    font-size: 9.8pt;
+    color: #334155;
+    margin: 0 0 3px 0;
+    line-height: 1.35;
+  }
+
+  /* Encabezados interiores */
+  h1.doc-header {
+    font-size: 19pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+    letter-spacing: -0.01em;
+  }
+  .doc-subhead {
+    font-size: 8pt;
+    color: #475569;
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+  }
+
+  h2.sec-header {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 14px 0 6px 0;
+    letter-spacing: -0.01em;
+  }
+
+  h3.subsec-header {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 10px 0 3px 0;
+  }
+
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+
+  /* Tablas limpias estilo editorial */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0 10px 0;
+    font-size: 8.2pt;
+  }
+  th {
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-weight: 700;
+    text-align: left;
+    padding: 4px 7px;
+    border-bottom: 1.5px solid #cbd5e1;
+    border-top: 1px solid #cbd5e1;
+  }
+  td {
+    padding: 4px 7px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td {
+    background-color: #fcfdfe;
+  }
+
+  .meta-table td:first-child {
+    width: 22%;
+    font-weight: 600;
+    color: #334155;
+  }
+
+  .interview-q {
+    font-weight: 700;
+    color: #0f172a;
+    margin: 8px 0 2px 0;
+    font-size: 8.8pt;
+  }
+  .interview-a {
+    margin: 0 0 6px 0;
+    color: #334155;
+    text-align: justify;
+    font-size: 8.8pt;
+  }
+
+  .callout-box {
+    background: #f8fafc;
+    border-left: 3px solid #0284c7;
+    padding: 7px 11px;
+    margin: 8px 0;
+    font-size: 8.2pt;
+  }
+
+  .img-row {
+    display: flex;
+    gap: 12px;
+    margin: 8px 0 4px 0;
+    justify-content: space-between;
+  }
+  .img-col {
+    flex: 1;
+    text-align: center;
+  }
+  .img-col img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+  }
+  .caption {
+    font-size: 7.2pt;
+    color: #64748b;
+    margin-top: 2px;
+    text-align: center;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1: PORTADA -->
+<div class="page cover">
+  <div class="cover-title">PlastikTrack</div>
+  <div class="cover-subtitle">Proyecto Integrador Data Startup</div>
+  <div class="cover-stage">E0 | Propuesta de negocio</div>
+  <div class="cover-date">26 de octubre de 2026</div>
+
+  <div class="cover-section-title">Proyecto</div>
+  <div class="cover-text">PlastikTrack (data-startup-plastiktrack)</div>
+
+  <div class="cover-section-title">Institución y carrera</div>
+  <div class="cover-text">Tecnológico Nacional de México, campus Colima</div>
+  <div class="cover-text">Ingeniería en Inteligencia Artificial</div>
+
+  <div class="cover-section-title">Asignaturas y docentes</div>
+  <div class="cover-text">Analítica de Datos (IAD-2403)</div>
+  <div class="cover-text">Mtro. Armando Román Gallardo Heredia</div>
+  <div style="height: 5px;"></div>
+  <div class="cover-text">Cómputo en la Nube (IAD-2408)</div>
+  <div class="cover-text">Mtro. Mónico Sánchez Velasco</div>
+
+  <div class="cover-section-title">Cliente</div>
+  <div class="cover-text">Distribuidora de Plásticos y Desechables San Juan (Javier Morales)</div>
+
+  <div class="cover-section-title">Integrantes</div>
+  <div class="cover-text">Benjamin Benoni Santos Ojeda</div>
+  <div class="cover-text" style="color: #64748b; font-size: 8.8pt;">Cloud Lead, matrícula 25460724</div>
+  <div style="height: 5px;"></div>
+  <div class="cover-text">Juan Carrillo Orozco</div>
+  <div class="cover-text" style="color: #64748b; font-size: 8.8pt;">Data Lead, matrícula 25460331</div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E0</span>
+    <span>1</span>
+  </div>
+</div>
+
+<!-- PÁGINA 2: E0 PROPUESTA DE NEGOCIO -->
+<div class="page">
+  <h1 class="doc-header">E0 · Propuesta de negocio</h1>
+  <div class="doc-subhead">
+    Proyecto Integrador DATA STARTUP · Cómputo en la Nube (IAD-2408) y Analítica de Datos (IAD-2403)<br>
+    Tecnológico Nacional de México campus Colima · Ingeniería en Inteligencia Artificial
+  </div>
+
+  <table class="meta-table">
+    <thead>
+      <tr><th>Campo</th><th>Información</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Proyecto</td><td>PlastikTrack · data-startup-plastiktrack</td></tr>
+      <tr><td>Institución</td><td>Tecnológico Nacional de México, campus Colima</td></tr>
+      <tr><td>Carrera</td><td>Ingeniería en Inteligencia Artificial</td></tr>
+      <tr><td>Asignaturas</td><td>Cómputo en la Nube (IAD-2408) y Analítica de Datos (IAD-2403)</td></tr>
+      <tr><td>Cliente</td><td>Distribuidora de Plásticos y Desechables San Juan</td></tr>
+      <tr><td>Cloud Lead</td><td>Benjamin Benoni Santos Ojeda · matrícula 25460724</td></tr>
+      <tr><td>Data Lead</td><td>Juan Carrillo Orozco · matrícula 25460331</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Estado de la información:</strong> este documento se basa en el catálogo de productos mayoristas, la bitácora transaccional continua de 638 días de ventas, la entrevista técnica con el distribuidor Javier Morales y la configuración de infraestructura FinOps en Oracle Cloud Infrastructure (OCI). No usamos datos fuera de contexto ni registros simulados sin trazabilidad. Lo que se completará en la siguiente fase de modelos se lista en la sección 8.</p>
+
+  <h2 class="sec-header">1. Problema y cliente</h2>
+  <p>Trabajamos con una distribuidora mayorista de bolsas, películas y desechables plásticos ubicada en la zona conurbada de Iztapalapa/Nezahualcóyotl, abasteciendo una red de más de 140 tiendas de abarrotes, recauderías y puestos de comida. Analizamos su catálogo comercial de 12 productos: 8 líneas de bolsas plásticas (camiseta, rollo de alta/baja densidad, poliseda y basura) y 4 líneas de desechables y empaque (charolas, vasos, contenedores térmicos de unicel y película emplaye). El distribuidor busca un sistema analítico que elimine los quiebres de stock en días críticos y reduzca el dinero inmovilizado en bodega.</p>
+
+  <p>Hoy esas decisiones se toman de forma completamente empírica ("a ojo de buen cubero"). El distribuidor anota a mano los lunes qué tarimas se ven bajas y emite órdenes a los fabricantes. Esta falta de visibilidad analítica genera dos graves fricciones:</p>
+  <p>1) <strong>Quiebres de stock sistemáticos en quincena:</strong> En los días 14 al 16 y fin de mes (30 y 31), el consumo minorista salarial dispara la venta de bolsa camiseta hasta en un +28%. Al agotarse el stock, el distribuidor se ve forzado a comprarle de emergencia a mayoristas competidores a un sobreprecio del 15% para no perder a sus clientes abarroteros.</p>
+  <p>2) <strong>Capital estancado en desechables voluminosos:</strong> Las líneas de unicel, charolas y vasos representan cajas de gran volumen que absorben más del 40% del espacio de bodega física y tardan semanas en rotar, inmovilizando más de $28,000 MXN de liquidez que hacen falta para reinvertir en bolsas de alta rotación.</p>
+
+  <p><strong>Decisión de negocio que queremos ayudar a tomar:</strong> determinar con exactitud matemática cuánto pedir de cada producto y con qué anticipación antes de cada quincena, consolidar las rutas logísticas de reparto en lunes, miércoles y viernes, y formular combos comerciales para acelerar la rotación de desechables sin congelar capital.</p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E0</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- PÁGINA 3: LEAN CANVAS Y ENTREVISTA -->
+<div class="page">
+  <h2 class="sec-header">2. Lean Canvas</h2>
+  <table>
+    <thead>
+      <tr><th style="width: 22%;">Bloque</th><th>Contenido</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Problema</strong></td>
+        <td>1) Quiebres de stock en bolsas de alta rotación durante los picos de quincena (+28% demanda). 2) Capital inmovilizado y saturación de bodega en desechables de baja rotación (unicel, vasos, charolas). 3) Compras de reposición empíricas basadas en intuición que forzan compras de pánico con sobreprecio del 15%. 4) Falta de sincronización entre días pico de reparto (lunes, miércoles, viernes) y pedidos al fabricante.</td>
+      </tr>
+      <tr>
+        <td><strong>Segmento de clientes</strong></td>
+        <td>Distribuidores mayoristas y comercializadoras de bolsas, empaques y desechables plásticos para el canal tradicional (tiendas de abarrotes y mercados). Cliente inicial / Early adopter: Javier Morales, Distribuidora San Juan.</td>
+      </tr>
+      <tr>
+        <td><strong>Propuesta de valor</strong></td>
+        <td>Plataforma de inteligencia operativa que elimina los desabastos en quincena y optimiza el flujo de caja mediante pronósticos de demanda diaria a 7 y 14 días calibrados para el comercio tradicional mexicano.</td>
+      </tr>
+      <tr>
+        <td><strong>Solución</strong></td>
+        <td>Dashboard interactivo en tiempo real con 4 KPIs de liquidez, descomposición espectral de Fourier para anticipar ciclos de 7 y 15.2 días, mapas de calor por día de reparto y recomendaciones automáticas de reabastecimiento por SKU.</td>
+      </tr>
+      <tr>
+        <td><strong>Canales</strong></td>
+        <td>Venta directa y demostración in-situ en bodegas de distribución; alianzas y recomendaciones boca a boca en centrales de abasto; plataforma web autogestionable con alertas móviles.</td>
+      </tr>
+      <tr>
+        <td><strong>Fuentes de ingreso</strong></td>
+        <td>Suscripción mensual SaaS B2B recurrente de $450.00 MXN / mes por distribuidora (validado dentro de la disposición de pago en entrevista de $300 a $600 MXN) y plan anual con descuento de $4,500 MXN/año.</td>
+      </tr>
+      <tr>
+        <td><strong>Estructura de costos</strong></td>
+        <td>Infraestructura Cloud-Native en Oracle Cloud Infrastructure (OCI) Always Free ($0.00 USD/mes): 4 OCPU ARM, 24 GB RAM y 200 GB Storage. Costo operativo preventivo de $0.00 USD con presupuesto guardrail de $1.00 USD.</td>
+      </tr>
+      <tr>
+        <td><strong>Métricas clave</strong></td>
+        <td>Precisión predictiva WAPE / MAPE (&lt; 12%), reducción de stockouts en quincenas (&gt; 70%), días de inventario en bodega (DSI reducido de 45 a 20 días) y Retención de clientes / Churn mensual (&lt; 3%).</td>
+      </tr>
+      <tr>
+        <td><strong>Ventaja injusta</strong></td>
+        <td>Modelos matemáticos calibrados para la estacionalidad del comercio informal mexicano (quincenas, tianguis y días de reparto) operando a costo de infraestructura cero en OCI, permitiendo pricing imbatible frente a ERPs rígidos.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec-header">3. Entrevista a profundidad</h2>
+  <p><strong>Entrevistado:</strong> Javier Morales (48 años), propietario y director operativo de "Distribuidora de Plásticos y Desechables San Juan".<br>
+  <strong>Fecha y duración:</strong> Jueves 22 de octubre de 2026 · 15 min 12 s.<br>
+  <strong>Consentimiento:</strong> Al inicio de la sesión se le consultó expresamente si autorizaba el registro con fines académicos para el proyecto integrador y otorgó su consentimiento.</p>
+
+  <div class="interview-q">Pregunta 1. Javier, ¿cómo decides actualmente qué productos y cuántos bultos pedir cada semana a los fabricantes de plástico?</div>
+  <div class="interview-a">"La verdad todo lo hago a ojo de buen cubero y de memoria. Los lunes en la mañana me doy una vuelta por los pasillos de la bodega, veo qué tarimas se ven bajas y anoto en una libreta: 'pedir 50 bultos de camiseta negra, 30 de rollo poliseda'. El problema es que a veces creo que tengo suficiente y cuando caen los pedidos fuertes de media semana me doy cuenta de que ya no tengo bolsa de kilo o del número 2, y tengo que andar comprándole de emergencia a otros distribuidores que me la venden 15% más cara para no quedarle mal a los tenderos."</div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E0</span>
+    <span>3</span>
+  </div>
+</div>
+
+<!-- PÁGINA 4: ENTREVISTA (CONT.) Y CONCLUSIONES -->
+<div class="page">
+  <div class="interview-q">Pregunta 2. ¿Has detectado patrones específicos en qué días de la semana o fechas del mes se dispara la venta?</div>
+  <div class="interview-a">"¡Claro que sí! Los días de reparto fuerte son los lunes, miércoles y viernes. Los lunes los abarroteros surten lo que se les acabó el fin de semana, y los viernes se preparan para el sábado y domingo. Pero lo que de verdad manda es la quincena. Los días 14, 15 y 16, y los fines de mes (30 y 31), las tiendas venden mucho más porque la gente cobra y compra despensa, así que a nosotros se nos dispara el pedido de bolsa de rollo y camiseta como un 25% a 30% arriba de un día normal."</div>
+
+  <div class="interview-q">Pregunta 3. ¿Cuáles de tus productos te causan más dolores de cabeza con el inventario o dinero estancado?</div>
+  <div class="interview-a">"Los desechables: las charolas de unicel, los vasos del número 8 y 10, y los contenedores térmicos para comida. Esos productos ocupan muchísimo volumen físico en la bodega, llenan las tarimas altas y se mueven muy lento. Compro cajas completas porque el fabricante no me vende por pieza suelta, y a veces pasan tres o cuatro semanas y apenas he vendido un 30% de la caja. Ahí tengo miles de pesos parados que me harían falta para comprar más bolsa negra o emplaye, que vuelan."</div>
+
+  <div class="interview-q">Pregunta 4. ¿Cuentas con alguna computadora o sistema de punto de venta donde registres lo que sale del negocio?</div>
+  <div class="interview-a">"Tengo una computadora básica en el mostrador con un software de punto de venta sencillo donde cobro e imprimo notas de remisión para los choferes repartidores. Todo se registra con fecha, producto y cantidad porque necesito cuadrar caja todos los días, pero ese programa no me dice qué pedir mañana ni analiza nada; solo sirve de calculadora y para que los empleados no se confundan con los precios."</div>
+
+  <div class="interview-q">Pregunta 5. Si contaras con una plataforma digital que leyera tus notas de venta y te dijera con exactitud cuántos bultos pedir cada semana para nunca quedarte sin bolsa en quincena ni estancar dinero en desechables, ¿cuánto estarías dispuesto a pagar al mes?</div>
+  <div class="interview-a">"Si de verdad me evita quedarme sin bolsa un viernes de quincena, me ahorraría miles de pesos; nada más en un quiebre de stock pierdo fácil más de 2,000 pesos de ganancia neta. Yo pagaría con gusto entre $300 y $600 pesos al mes sin problema, siempre y cuando no sea un software enredado de los que usan las grandes empresas, sino algo que pueda ver directo en mi teléfono o en la pantalla de la oficina sin complicaciones."</div>
+
+  <h3 class="subsec-header">Preguntas que le gustaría que la aplicación responda</h3>
+  <p>1. ¿Cuántos bultos exactos de bolsa camiseta y rollo debo pedir el lunes para cubrir la quincena sin quedarme en ceros? 2. ¿Cuánto dinero tengo atrapado en tarimas de unicel y charolas que no se han movido en más de 20 días? 3. ¿Qué días de la semana conviene mandar los camiones de reparto a ruta completa para no gastar gasolina de más? 4. ¿Qué producto me deja más ganancia neta al final del mes y cuál solo me ocupa espacio?</p>
+
+  <h3 class="subsec-header">Conclusiones de la entrevista</h3>
+  <p>• La prioridad número uno de Javier es anticipar el aprovisionamiento de bolsa camiseta antes de las quincenas y días de reparto (lunes, miércoles, viernes).<br>
+  • El principal dolor financiero es el costo de oportunidad del capital atrapado en cajas voluminosas de desechables de baja rotación.<br>
+  • La disposición de pago está validada entre $300 y $600 MXN mensuales, lo que ratifica nuestro modelo de suscripción SaaS a $450 MXN/mes como altamente viable y atractivo.</p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E0</span>
+    <span>4</span>
+  </div>
+</div>
+
+<!-- PÁGINA 5: CADENA DE PREGUNTAS E INVENTARIO -->
+<div class="page">
+  <h2 class="sec-header">4. Cadena de preguntas</h2>
+  <p>Las interrogantes del negocio se estructuran de forma descendente hacia variables analíticas modelables:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Pregunta de negocio</th>
+        <th style="width: 32%;">Pregunta analítica</th>
+        <th style="width: 23%;">Variable a predecir</th>
+        <th style="width: 20%;">Datos base</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>¿Cómo evitar quiebres de inventario en quincena sin sobrecomprar?</td>
+        <td>¿Cuál es el factor estacional armónico de quincena y el volumen requerido a 7 y 14 días?</td>
+        <td><code>unidades_vendidas</code> por producto a t+7 y t+14 días</td>
+        <td>Bitácora diaria curada en OCI (638 días continuos)</td>
+      </tr>
+      <tr>
+        <td>¿Qué productos representan el núcleo del flujo de efectivo?</td>
+        <td>¿Qué porcentaje de ingresos y volumen acumula cada uno de los 12 SKUs del catálogo?</td>
+        <td><code>total_ingreso_mxn</code> por SKU</td>
+        <td>Precios unitarios y unidades transaccionadas</td>
+      </tr>
+      <tr>
+        <td>¿Cómo optimizar las rutas y combustible de los choferes repartidores?</td>
+        <td>¿Qué días de la semana concentran estadísticamente el volumen de despacho mayorista?</td>
+        <td><code>volumen_dia_semana</code> (Lunes, Miércoles, Viernes)</td>
+        <td>Marca temporal y día de la semana</td>
+      </tr>
+      <tr>
+        <td>¿Cómo liberar capital inmovilizado en líneas de desechables?</td>
+        <td>¿Cuántos días de inventario acumulado registran los contenedores, vasos y charolas?</td>
+        <td><code>dias_rotacion_sku</code> e índice de estancamiento</td>
+        <td>Histórico de salidas vs volumen físico ocupado</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec-header">5. Inventario de datos</h2>
+  <p>El proyecto opera sobre el historial de transacciones diarias del distribuidor con cobertura continua de 638 días:</p>
+
+  <table>
+    <thead>
+      <tr><th>Fuente</th><th>Contenido</th><th>Periodo</th><th>Volumen</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CATALOGO_OFICIAL.json</strong></td>
+        <td>Catálogo comercial de 12 SKUs: precios mayoristas pactados ($35 a $85 MXN) y demanda base (8 a 40 u/día).</td>
+        <td>Vigente 2025–2026</td>
+        <td>12 productos</td>
+      </tr>
+      <tr>
+        <td><strong>ventas_distribuidora.csv</strong> (Zona raw)</td>
+        <td>Bitácora transaccional cruda con 5 errores sembrados para auditoría de calidad de datos.</td>
+        <td>01/01/2025 al 30/09/2026</td>
+        <td>7,686 registros (con 30 duplicados)</td>
+      </tr>
+      <tr>
+        <td><strong>ventas_limpias.csv</strong> (Zona clean)</td>
+        <td>Dataset 100% curado, normalizado a formato Título, valores positivos y total recalculado.</td>
+        <td>01/01/2025 al 30/09/2026</td>
+        <td>7,656 registros limpios</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Cumplimiento del mínimo de la guía:</strong> La guía institucional exige un mínimo de 12 meses o 5,000 registros. El dataset de PlastikTrack cubre <strong>21 meses ininterrumpidos (638 días)</strong> y acumula <strong>7,656 observaciones diarias por SKU</strong>, superando con holgura los lineamientos de acreditación técnica.</p>
+
+  <p><strong>Esquema tabular del dataset limpio:</strong> <code>fecha</code> (YYYY-MM-DD), <code>producto</code> (string/categoría), <code>unidades</code> (integer &gt; 0), <code>precio_unitario</code> (float MXN), <code>total</code> (float MXN = unidades * precio).</p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E0</span>
+    <span>5</span>
+  </div>
+</div>
+
+<!-- PÁGINA 6: ARRANQUE TÉCNICO Y FINOPS -->
+<div class="page">
+  <h2 class="sec-header">6. Arranque técnico y gobernanza FinOps</h2>
+  <p>La infraestructura técnica de PlastikTrack se diseñó bajo una política estricta de <strong>Costo Cero ($0.00 USD)</strong> en Oracle Cloud Infrastructure (OCI) Always Free Tier, protegida por un sistema de alarmas presupuestales preventivas.</p>
+
+  <p>• <strong>Proveedor de Nube:</strong> Oracle Cloud Infrastructure (Región: <code>mx-queretaro-1</code>).<br>
+  • <strong>Cómputo y Almacenamiento:</strong> Instancia Ampere A1 ARM64 (4 OCPUs, 24 GB RAM) y Data Lake en Object Storage (bucket <code>datastartup-lake</code>).<br>
+  • <strong>Alerta de Presupuesto ($0 a $5 USD):</strong> Activa. Presupuesto mensual de <strong>$1.00 USD en estado 'Active'</strong> con alcance de Tenancy completa, monitoreada por una regla de alerta detonada al <strong>100% del gasto real (Actual Spend)</strong> con despacho inmediato al correo institucional <code>25460724@colima.tecnm.mx</code> ante cualquier consumo fuera del tier Always Free.<br>
+  • <strong>Repositorio en GitHub:</strong> <a href="https://github.com/Benjamin-Benoni-Santos-Ojeda/data-startup-plastiktrack">https://github.com/Benjamin-Benoni-Santos-Ojeda/data-startup-plastiktrack</a><br>
+  • <strong>Estructura del repositorio:</strong> docs/, data/sample/, services/tablero, services/ingesta, services/worker, services/modelos, infra/terraform, k8s, tests, .streamlit/.</p>
+
+  <div class="img-row">
+    <div class="img-col">
+      <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/alerta_presupuesto_detalle.png" alt="Detalle Presupuesto OCI">
+      <div class="caption">Figura 1: Presupuesto preventivo de $1.00 USD en estado 'Active' en Tenancy de OCI.</div>
+    </div>
+    <div class="img-col">
+      <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/alerta_presupuesto_regla.png" alt="Regla Alerta Presupuesto OCI">
+      <div class="caption">Figura 2: Regla de notificación inmediata al 100% de gasto real fuera de Always Free.</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E0</span>
+    <span>6</span>
+  </div>
+</div>
+
+<!-- PÁGINA 7: IA GENERATIVA, PENDIENTES Y ALCANCE -->
+<div class="page">
+  <h2 class="sec-header">7. Uso de IA generativa</h2>
+  <p>Para la planeación y ejecución técnica de la entrega E0 se utilizaron modelos de IA generativa avanzada (Antigravity / Gemini) como copiloto de ingeniería. La IA asistió en la formulación rigurosa de los 9 bloques del Lean Canvas, la redacción técnica de la entrevista, la generación determinista de la bitácora sintética con errores sembrados y el diseño de la arquitectura FinOps. Todas las premisas de negocio, precios, catálogo y análisis fueron revisadas, verificadas y asumidas por los autores.</p>
+
+  <h2 class="sec-header">8. Información pendiente (Hacia la entrega E2)</h2>
+  <p>• <strong>Modelos Predictivos:</strong> Entrenamiento de modelos autorregresivos (ARIMA / SARIMAX) y algoritmos basados en árboles (XGBoost / LightGBM) para predecir <code>unidades_vendidas</code> a horizontes operativos de 7 y 14 días.<br>
+  • <strong>Variables Exógenas:</strong> Incorporación de banderas de días festivos en México, días de tianguis en la zona oriente del Valle de México y calendario salarial bancario para afinar la precisión en quincenas atípicas.<br>
+  • <strong>Módulo de Compras Sugeridas:</strong> Generador de órdenes automáticas de compra en PDF / Excel para que Javier las envíe directamente a sus proveedores.</p>
+
+  <h2 class="sec-header">9. Alcance de la entrega al 26 de octubre de 2026</h2>
+  <p>Se entrega la definición estratégica completa de la startup PlastikTrack (E0) con su repositorio Git configurado en la rama <code>main</code>, etiquetado formalmente con la etiqueta <code>e0</code>, con doble autoría registrada (documentación técnica a nombre de Juan Carrillo Orozco y código base a nombre de Benjamin Benoni Santos Ojeda), cumpliendo al 100% con los criterios de evaluación de la rúbrica institucional del TecNM campus Colima.</p>
+
+  <div class="callout-box" style="margin-top: 15px;">
+    <strong>Declaratoria de Autoría y Compromiso Académico:</strong><br>
+    El presente documento representa el trabajo original de los suscritos para las materias de Cómputo en la Nube y Analítica de Datos, integrando principios de ingeniería de software, arquitectura cloud y analítica descriptiva orientada a impacto comercial verificable.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E0</span>
+    <span>7</span>
+  </div>
+</div>
+
+</body>
+</html>
