@@ -2,9 +2,9 @@
 
 **Proyecto Integrador:** DATA STARTUP  
 **Entregas:** E0 (Definición y Factibilidad Estratégica) y E1 (Ingeniería de Datos y Analítica Base)  
-**Roles:** Cloud Lead & Data Lead  
-**Fecha:** Octubre 2026  
-**Empresa / Caso de Estudio:** Distribuidora Mayorista "PlastikTrack" (Distribuidor Javier)
+**Roles:** Cloud Lead (Benjamin Benoni Santos Ojeda - 25460724) & Data Lead (Juan Carrillo Orozco - 25460331)  
+**Fecha:** Octubre / Noviembre 2026  
+**Empresa / Caso de Estudio:** Distribuidora Mayorista "PlastikTrack" (Distribuidor Javier Morales)
 
 ---
 
@@ -13,7 +13,7 @@
 **PlastikTrack** es una startup SaaS B2B enfocada en modernizar y optimizar la cadena de suministro de distribuidoras mayoristas de bolsas, películas y desechables plásticos que abastecen a la densa red de tiendas de abarrotes, recauderías, pollerías y comercios minoristas en México.
 
 En el comercio mayorista tradicional, más del 85% de las decisiones de reabastecimiento se toman de manera puramente empírica ("al tanteo" o "a ojo de buen cubero"). Esto genera dos fallas operativas críticas que drenan el margen del negocio:
-1. **Quiebres de stock recurrentes** en productos de alta rotación (bolsas tipo camiseta y rollos) durante los días pico de reparto y ciclos de quincena, forzando compras de emergencia a precios inflados o pérdida irreversible de ventas ante competidores.
+1. **Quiebres de stock recurrentes** en productos de alta rotación (bolsas tipo camiseta y rollos) durante los días pico de reparto y ciclos de quincena, forzando compras de emergencia a precios inflados (~15% más caras) o pérdida irreversible de ventas ante competidores.
 2. **Sobreinventario y capital inmovilizado** en líneas voluminosas de baja rotación (contenedores térmicos de unicel, vasos y charolas desechables), saturando el espacio de bodega física y castigando el flujo de caja.
 
 PlastikTrack resuelve esta fricción convirtiendo el historial transaccional de venta en un motor de telemetría analítica y pronósticos de demanda a 7 y 14 días, permitiendo a los distribuidores aprovisionarse con precisión quirúrgica a costo computacional cero gracias a una arquitectura Cloud-Native en Oracle Cloud Infrastructure (OCI).
@@ -25,7 +25,7 @@ PlastikTrack resuelve esta fricción convirtiendo el historial transaccional de 
 | Bloque | Componente | Descripción Estratégica en PlastikTrack |
 | :--- | :--- | :--- |
 | **1** | **Problema** | • Quiebres de stock en bolsas de alta rotación durante quincenas y días de reparto.<br>• Capital inmovilizado y espacio de bodega ocupado por productos desechables de baja rotación.<br>• Falta de visibilidad analítica: compras semanales basadas en intuición.<br>• Pérdida de clientes hacia otros distribuidores por falta de abasto oportuno. |
-| **2** | **Segmento de Clientes** | • **Early Adopter:** Distribuidor Javier (propietario de distribuidora de bolsas y desechables, 1 bodega central, 2 rutas de reparto abasteciendo 140 tiendas de abarrotes y negocios de comida).<br>• Distribuidores mayoristas y comercializadoras de plásticos, empaques y desechables en centrales de abasto y zonas suburbanas. |
+| **2** | **Segmento de Clientes** | • **Early Adopter:** Distribuidor Javier Morales (propietario de distribuidora de bolsas y desechables, 1 bodega central, 2 rutas de reparto abasteciendo a más de 140 tiendas de abarrotes y negocios de comida).<br>• Distribuidores mayoristas y comercializadoras de plásticos, empaques y desechables en centrales de abasto y zonas suburbanas. |
 | **3** | **Propuesta de Valor Única** | *"Elimina los quiebres de inventario en quincena y libera hasta un 30% de tu capital de trabajo con pronósticos inteligentes de demanda diseñados específicamente para distribuidores de plásticos."* |
 | **4** | **Solución** | • Tablero de control interactivo en tiempo real con KPIs clave y análisis de estacionalidad.<br>• Motor de recomendación de órdenes de compra con horizonte predictivo a 7 y 14 días.<br>• Descomposición de periodicidad (días pico de reparto: lunes, miércoles, viernes y efectos de quincena).<br>• Alertas automatizadas de reposición por SKU enviadas por WhatsApp / Web. |
 | **5** | **Canales** | • Venta consultiva directa y demostración in-situ en bodegas de distribución.<br>• Alianzas comerciales y recomendación referenciada ("boca a boca") en Centrales de Abasto.<br>• Portal web autogestionable y notificaciones vía canal de mensajería (WhatsApp Business API). |
@@ -70,7 +70,7 @@ Para garantizar impacto económico tangible, el pipeline analítico se estructur
 ```mermaid
 flowchart LR
     A["Pregunta de Negocio:<br>¿Cómo evitar quiebres en quincena y optimizar el capital de trabajo?"] --> B["Pregunta Analítica:<br>¿Cuáles son los ciclos periódicos, estacionalidad y tendencia de ventas por SKU?"]
-    B --> C["Variable a Predecir:<br><b>unidades_vendidas</b> diarias por producto a horizontes de 7 y 14 días"]
+    B --> C["Variable a Predecir:<br><b>unidades</b> vendidas diarias por producto a horizontes de 7 y 14 días"]
 ```
 
 1. **Pregunta de Negocio:**
@@ -78,40 +78,42 @@ flowchart LR
 2. **Pregunta Analítica:**
    > *"¿Qué componentes de periodicidad semanal (lunes/miércoles/viernes), patrones bimensuales de quincena (efecto 15 y 30/31) y tendencias de consumo caracterizan la demanda histórica de cada uno de los 12 productos del catálogo?"*
 3. **Variable Objetivo a Predecir:**
-   > `unidades_vendidas` (variable cuantitativa entera continua por SKU y fecha, proyectada a horizontes operativos de 7 y 14 días para sincronizarse con los tiempos de entrega de los fabricantes).
+   > `unidades` (variable cuantitativa entera continua por SKU y fecha, proyectada a horizontes operativos de 7 y 14 días para sincronizarse con los tiempos de reposición de los fabricantes).
 
 ---
 
 ## 5. Inventario de Datos de Ventas
 
-El dataset histórico que soporta la fase analítica y de modelado cuenta con las siguientes especificaciones técnicas de volumen y esquema:
+El dataset histórico transaccional que soporta la fase analítica y de modelado cuenta con las siguientes especificaciones técnicas de volumen y esquema:
 
-* **Total de Observaciones:** **7,656 registros** estructurados de transacciones diarias.
-* **Cobertura Temporal:** **638 días continuos** (del **1 de enero de 2025 al 30 de septiembre de 2026** sin interrupciones).
-* **Profundidad de Catálogo:** **12 productos oficiales** distribuidos en 3 familias funcionales (Bolsas de rollo/alta densidad, Bolsas camiseta de alta rotación, y Desechables/empaque industrial).
-* **Estructura Tabular:**
+* **Total de Observaciones Crudas:** **16,498 registros** transaccionales en el archivo fuente `ventas_distribuidora.csv`.
+* **Total de Observaciones Limpias:** **16,428 registros** curados y deduplicados por clave de negocio (`fecha` + `producto`).
+* **Cobertura Temporal:** **1,369 días continuos** (del **1 de enero de 2023 al 30 de septiembre de 2026** sin interrupciones, equivalente a 3 años y 9 meses de historial operativo).
+* **Profundidad de Catálogo:** **12 productos oficiales** distribuidos equilibradamente en 3 familias funcionales (Bolsas Rollo, Bolsas Camiseta, y Desechables y Empaque).
+* **Volumen Físico y Monetario Acumulado:** **411,524 unidades** comercializadas representando **$18,672,916.50 MXN** en facturación total acumulada.
+* **Estructura Tabular del Registro:**
 
 | Columna | Tipo de Dato | Descripción y Regla de Negocio |
 | :--- | :--- | :--- |
-| `fecha` | `date` (YYYY-MM-DD) | Marca de tiempo del día de operación comercial (638 fechas únicas). |
+| `fecha` | `date` (YYYY-MM-DD) | Marca temporal del día operativo (1,369 fechas únicas continuas). |
 | `producto` | `string` (categoría) | Nombre homologado del SKU de acuerdo al catálogo oficial de Javier. |
 | `unidades` | `integer` | Volumen físico despachado en el día (bultos, paquetes o millares según SKU). |
-| `precio_unitario` | `float` (MXN) | Precio unitario mayorista pactado con la red de tiendas de abarrotes. |
+| `precio_unitario` | `float` (MXN) | Precio unitario mayorista pactado con la red minorista. |
 | `total` | `float` (MXN) | Importe transaccionado del día calculado como: `unidades * precio_unitario`. |
 
-### Catálogo de Productos y Parámetros Base de Demanda:
-1. **Bolsa basura todos tamanios:** $48.00 MXN | Demanda base: 32 u/día
-2. **Bolsa rollo poliseda:** $38.00 MXN | Demanda base: 28 u/día
-3. **Bolsa rollo baja densidad:** $35.00 MXN | Demanda base: 35 u/día
-4. **Bolsa rollo alta densidad:** $42.00 MXN | Demanda base: 30 u/día
-5. **Bolsa negra camiseta:** $45.00 MXN | Demanda base: 40 u/día *(Producto Estrella)*
-6. **Bolsa camiseta poliseda:** $40.00 MXN | Demanda base: 34 u/día
-7. **Bolsa camiseta plata:** $44.00 MXN | Demanda base: 22 u/día
-8. **Bolsa camiseta color:** $42.00 MXN | Demanda base: 25 u/día
-9. **Charolas desechables:** $65.00 MXN | Demanda base: 9 u/día *(Baja rotación)*
-10. **Vasos desechables:** $55.00 MXN | Demanda base: 11 u/día *(Baja rotación)*
-11. **Contenedor termico unicel:** $72.00 MXN | Demanda base: 8 u/día *(Baja rotación)*
-12. **Pelicula plastica emplaye:** $85.00 MXN | Demanda base: 14 u/día
+### Catálogo de Productos y Estadísticas Históricas de Demanda:
+1. **Bolsa Negra Camiseta:** Precio $38.50 MXN | 57,251 u totales | $2,204,163.50 MXN *(Producto Estrella)*
+2. **Bolsa Rollo Baja Densidad:** Precio $29.50 MXN | 49,701 u totales | $1,466,179.50 MXN
+3. **Bolsa Camiseta Poliseda:** Precio $41.00 MXN | 48,483 u totales | $1,987,803.00 MXN
+4. **Bolsa Basura Todos Tamanios:** Precio $41.00 MXN | 45,146 u totales | $1,850,986.00 MXN
+5. **Bolsa Rollo Alta Densidad:** Precio $36.00 MXN | 42,698 u totales | $1,537,128.00 MXN
+6. **Bolsa Rollo Poliseda:** Precio $33.00 MXN | 39,325 u totales | $1,297,725.00 MXN
+7. **Bolsa Camiseta Color:** Precio $44.25 MXN | 35,548 u totales | $1,572,999.00 MXN
+8. **Bolsa Camiseta Plata:** Precio $47.00 MXN | 31,271 u totales | $1,469,737.00 MXN
+9. **Pelicula Plastica Emplaye:** Precio $95.50 MXN | 20,310 u totales | $1,939,605.00 MXN
+10. **Vasos Desechables:** Precio $57.00 MXN | 16,609 u totales | $946,713.00 MXN *(Baja rotación)*
+11. **Charolas Desechables:** Precio $67.50 MXN | 13,390 u totales | $903,825.00 MXN *(Baja rotación)*
+12. **Contenedor Termico Unicel:** Precio $75.00 MXN | 11,792 u totales | $884,400.00 MXN *(Baja rotación)*
 
 ---
 
@@ -132,7 +134,7 @@ Para salvaguardar la viabilidad financiera de la startup y garantizar costo oper
 * **Umbral de Alerta:** **100% ($1.00 USD)** con disparo automático inmediato.
 * **Canal y Destinatario:** Notificación prioritaria vía correo electrónico institucional ante cualquier consumo detectado fuera del tier Always Free.
 
-A continuación se documenta la doble evidencia fotográfica de la configuración activa en la consola de OCI:
+A continuación se documenta la evidencia fotográfica de la configuración activa en la consola de OCI:
 
 #### Detalle del Presupuesto en Tenancy
 ![Detalle del Presupuesto OCI](img/alerta_presupuesto_detalle.png)
@@ -140,5 +142,5 @@ A continuación se documenta la doble evidencia fotográfica de la configuració
 #### Regla de Alerta al 100% de Gasto Real
 ![Regla de Alerta de Presupuesto 100%](img/alerta_presupuesto_regla.png)
 
-*Figura 1: Presupuesto mensual de $1.00 USD en estado activo con alcance de Tenancy completa.*  
+*Figura 1: Presupuesto mensual preventivo de $1.00 USD en estado activo con alcance de Tenancy completa en OCI.*  
 *Figura 2: Regla de notificación inmediata al correo institucional ante el 100% de gasto real detectado fuera del tier Always Free.*

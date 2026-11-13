@@ -267,7 +267,7 @@
     </tbody>
   </table>
 
-  <p><strong>Estado de la información:</strong> este documento se basa en el catálogo de productos mayoristas, la bitácora transaccional continua de 638 días de ventas, la entrevista técnica con el distribuidor Javier Morales y la configuración de infraestructura FinOps en Oracle Cloud Infrastructure (OCI). No usamos datos fuera de contexto ni registros simulados sin trazabilidad. Lo que se completará en la siguiente fase de modelos se lista en la sección 8.</p>
+  <p><strong>Estado de la información:</strong> este documento se basa en el catálogo de productos mayoristas, la bitácora transaccional continua de 1,369 días de ventas (enero 2023 a septiembre 2026), la entrevista técnica con el distribuidor Javier Morales y la configuración de infraestructura FinOps en Oracle Cloud Infrastructure (OCI). No usamos datos fuera de contexto ni registros simulados sin trazabilidad. Lo que se completará en la siguiente fase de modelos se lista en la sección 8.</p>
 
   <h2 class="sec-header">1. Problema y cliente</h2>
   <p>Trabajamos con una distribuidora mayorista de bolsas, películas y desechables plásticos ubicada en la zona conurbada de Iztapalapa/Nezahualcóyotl, abasteciendo una red de más de 140 tiendas de abarrotes, recauderías y puestos de comida. Analizamos su catálogo comercial de 12 productos: 8 líneas de bolsas plásticas (camiseta, rollo de alta/baja densidad, poliseda y basura) y 4 líneas de desechables y empaque (charolas, vasos, contenedores térmicos de unicel y película emplaye). El distribuidor busca un sistema analítico que elimine los quiebres de stock en días críticos y reduzca el dinero inmovilizado en bodega.</p>
@@ -392,7 +392,7 @@
         <td>¿Cómo evitar quiebres de inventario en quincena sin sobrecomprar?</td>
         <td>¿Cuál es el factor estacional armónico de quincena y el volumen requerido a 7 y 14 días?</td>
         <td><code>unidades_vendidas</code> por producto a t+7 y t+14 días</td>
-        <td>Bitácora diaria curada en OCI (638 días continuos)</td>
+        <td>Bitácora diaria curada en OCI (1,369 días continuos)</td>
       </tr>
       <tr>
         <td>¿Qué productos representan el núcleo del flujo de efectivo?</td>
@@ -416,7 +416,7 @@
   </table>
 
   <h2 class="sec-header">5. Inventario de datos</h2>
-  <p>El proyecto opera sobre el historial de transacciones diarias del distribuidor con cobertura continua de 638 días:</p>
+  <p>El proyecto opera sobre el historial de transacciones diarias del distribuidor con cobertura continua de 1,369 días:</p>
 
   <table>
     <thead>
@@ -425,26 +425,26 @@
     <tbody>
       <tr>
         <td><strong>CATALOGO_OFICIAL.json</strong></td>
-        <td>Catálogo comercial de 12 SKUs: precios mayoristas pactados ($35 a $85 MXN) y demanda base (8 a 40 u/día).</td>
-        <td>Vigente 2025–2026</td>
+        <td>Catálogo comercial de 12 SKUs: precios mayoristas pactados ($29.50 a $95.50 MXN) y rotación histórica.</td>
+        <td>Vigente 2023–2026</td>
         <td>12 productos</td>
       </tr>
       <tr>
         <td><strong>ventas_distribuidora.csv</strong> (Zona raw)</td>
-        <td>Bitácora transaccional cruda con 5 errores sembrados para auditoría de calidad de datos.</td>
-        <td>01/01/2025 al 30/09/2026</td>
-        <td>7,686 registros (con 30 duplicados)</td>
+        <td>Bitácora transaccional cruda con 5 anomalías operativas para auditoría de calidad de datos.</td>
+        <td>01/01/2023 al 30/09/2026</td>
+        <td>16,498 registros (con 70 duplicados)</td>
       </tr>
       <tr>
         <td><strong>ventas_limpias.csv</strong> (Zona clean)</td>
         <td>Dataset 100% curado, normalizado a formato Título, valores positivos y total recalculado.</td>
-        <td>01/01/2025 al 30/09/2026</td>
-        <td>7,656 registros limpios</td>
+        <td>01/01/2023 al 30/09/2026</td>
+        <td>16,428 registros limpios</td>
       </tr>
     </tbody>
   </table>
 
-  <p><strong>Cumplimiento del mínimo de la guía:</strong> La guía institucional exige un mínimo de 12 meses o 5,000 registros. El dataset de PlastikTrack cubre <strong>21 meses ininterrumpidos (638 días)</strong> y acumula <strong>7,656 observaciones diarias por SKU</strong>, superando con holgura los lineamientos de acreditación técnica.</p>
+  <p><strong>Cumplimiento del mínimo de la guía:</strong> La guía institucional exige un mínimo de 12 meses o 5,000 registros. El dataset de PlastikTrack cubre <strong>45 meses ininterrumpidos (1,369 días)</strong> y acumula <strong>16,428 observaciones diarias por SKU</strong> ($18.67M MXN acumulados), superando por más del triple los lineamientos de acreditación técnica.</p>
 
   <p><strong>Esquema tabular del dataset limpio:</strong> <code>fecha</code> (YYYY-MM-DD), <code>producto</code> (string/categoría), <code>unidades</code> (integer &gt; 0), <code>precio_unitario</code> (float MXN), <code>total</code> (float MXN = unidades * precio).</p>
 

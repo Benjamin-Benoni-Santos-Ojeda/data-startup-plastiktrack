@@ -215,7 +215,7 @@
   <h2 class="sec-header">Contexto y procedencia</h2>
   <p>Con PlastikTrack buscamos ayudar a Distribuidora de Plásticos y Desechables San Juan (propiedad de Javier Morales) a optimizar la reposición de mercancía, eliminar los quiebres de stock en días pico y liberar capital de trabajo inmovilizado en bodega. Presentamos la entrega E1 (26 de octubre de 2026) del Proyecto Integrador Data Startup del TecNM campus Colima.</p>
 
-  <p>Datos reales y trazables de la operación comercial: (1) el catálogo mayorista de 12 productos plásticos y desechables (con precios de $35 a $85 MXN y demandas base de 8 a 40 u/día) y (2) la bitácora transaccional continua de 638 días de ventas (enero 2025 a septiembre 2026), registrando 7,656 transacciones diarias limpias y un acumulado de $9,067,825 MXN en ventas. La arquitectura de persistencia se diseñó como un Data Lake en Oracle Cloud Infrastructure (OCI Object Storage) en el bucket <code>datastartup-lake</code>, dividida en capa <code>raw/</code> inmutable y capa <code>clean/</code> curada.</p>
+  <p>Datos reales y trazables de la operación comercial: (1) el catálogo mayorista de 12 productos plásticos y desechables (con precios de $29.50 a $95.50 MXN y demandas históricas) y (2) la bitácora transaccional continua de 1,369 días de ventas (enero 2023 a septiembre 2026), registrando 16,428 transacciones diarias limpias y un acumulado de $18,672,916.50 MXN en ventas (411,524 unidades). La arquitectura de persistencia se diseñó como un Data Lake en Oracle Cloud Infrastructure (OCI Object Storage) en el bucket <code>datastartup-lake</code>, dividida en capa <code>raw/</code> inmutable y capa <code>clean/</code> curada.</p>
 
   <p>En el informe y el tablero interactivo usamos esa información. El dataset original en crudo incorporó formalmente los cinco errores sembrados requeridos por la guía docente para auditar la robustez del pipeline ETL. Las transformaciones analíticas, imputaciones por mediana y recálculos deterministas están totalmente documentados y respaldados mediante pruebas automatizadas con <code>pytest</code>.</p>
 
@@ -225,7 +225,7 @@
   <h2 class="sec-header">Datos y procedimiento</h2>
   <p>Tomamos el dataset de transacciones diarias del distribuidor. Mediante <code>limpiar_datos.py</code> ejecutamos un pipeline determinista en Python: eliminamos los duplicados, estandarizamos nombres a formato Título, corregimos valores negativos a positivos, acotamos atípicos mayores a 500 unidades a la mediana del producto e imputamos los valores nulos con la mediana histórica por SKU, recalculando <code>total = unidades * precio_unitario</code>.</p>
 
-  <p>El dataset curado de 7,656 registros limpios se aloja en OCI Object Storage dentro de la partición <code>clean/ventas_limpias.csv</code>. El tablero empresarial en Streamlit (<code>services/tablero/app.py</code>) se conecta en tiempo real a la nube mediante una Solicitud Preautenticada (PAR) de solo lectura configurada de forma segura en <code>.streamlit/secrets.toml</code>, garantizando cero almacenamiento de credenciales en el repositorio de Git.</p>
+  <p>El dataset curado de 16,428 registros limpios se aloja en OCI Object Storage dentro de la partición <code>clean/ventas_limpias.csv</code>. El tablero empresarial en Streamlit (<code>services/tablero/app.py</code>) se conecta en tiempo real a la nube mediante una Solicitud Preautenticada (PAR) de solo lectura configurada de forma segura en <code>.streamlit/secrets.toml</code>, garantizando cero almacenamiento de credenciales en el repositorio de Git.</p>
 
   <div class="page-footer">
     <span>PlastikTrack · E1</span>
@@ -236,23 +236,23 @@
 <!-- PÁGINA 3: LIMPIEZA, KPIS Y VISUALIZACIÓN 1 -->
 <div class="page">
   <h2 class="sec-header">Limpieza reproducible y auditoría</h2>
-  <p>El archivo de origen en la capa <code>raw/</code> (<code>ventas_distribuidora.csv</code>) acumulaba 7,686 registros y contenía los cinco errores de captura evaluados por la guía técnica. <strong>Nulos:</strong> 40 registros con unidades vacías (imputados con la mediana por producto). <strong>Duplicados:</strong> 30 filas idénticas redundantes (detectadas por hash y eliminadas con <code>.drop_duplicates()</code>). <strong>Negativos:</strong> 15 registros con unidades negativas (corregidos a positivo con <code>.abs()</code>). <strong>Atípicos:</strong> 10 valores extremos de 999 unidades (acotados a la mediana por producto). <strong>Formato:</strong> 25 inconsistencias de nombres en minúsculas (estandarizados a formato Título). Filas iniciales: 7,686. Filas limpias finales: 7,656. Residuales: 0 nulos, 0 duplicados y 100% de consistencia monetaria verificada en pruebas automatizadas.</p>
+  <p>El archivo de origen en la capa <code>raw/</code> (<code>ventas_distribuidora.csv</code>) acumulaba 16,498 registros y contenía las anomalías operativas evaluadas por la guía técnica. <strong>Formato:</strong> 70 inconsistencias de nombres en minúsculas y espacios (estandarizados con <code>strip() + title()</code>). <strong>Duplicados:</strong> 70 registros por clave fecha+producto (eliminados conservando primera aparición). <strong>Negativos:</strong> 35 registros con unidades negativas (corregidos a positivo con <code>.abs()</code>). <strong>Atípicos contextuales:</strong> 25 valores extremos (&ge;500 o ratio &gt;3x vs grupo producto&times;día&times;quincena, acotados a la mediana). <strong>Nulos:</strong> 90 nulos en unidades (imputados con mediana de grupo) y 12 en precio (imputados con ffill/bfill). Filas iniciales: 16,498. Filas limpias finales: 16,428. Residuales: 0 nulos, 0 duplicados y 100% de consistencia monetaria verificada en pruebas automatizadas.</p>
 
   <h2 class="sec-header">Cuatro KPIs visibles</h2>
   <ol>
-    <li><strong>Ventas Totales:</strong> $9,067,825.00 MXN. Representa la facturación bruta acumulada durante los 638 días continuos observados, totalizando 215,892 unidades despachadas.</li>
-    <li><strong>Ticket Diario Promedio:</strong> $14,212.89 MXN. Facturación media por jornada operativa de reparto, métrica base para presupuestar la cobranza diaria.</li>
-    <li><strong>Producto Estrella:</strong> Bolsa Negra Camiseta. Lidera con 40 unidades diarias base y $1,397,880 MXN acumulados, siendo el SKU con mayor tracción comercial.</li>
-    <li><strong>Variación Semanal:</strong> +4.82%. Crecimiento de demanda en los últimos 7 días versus la ventana semanal inmediata anterior, confirmando una trayectoria ascendente.</li>
+    <li><strong>Ventas Totales:</strong> $18,672,916.50 MXN. Representa la facturación bruta acumulada durante los 1,369 días continuos observados, totalizando 411,524 unidades despachadas.</li>
+    <li><strong>Ticket Diario Promedio:</strong> $13,639.82 MXN. Facturación media por jornada operativa de reparto ($1,136.65 MXN por línea transaccional), métrica base para presupuestar la cobranza diaria.</li>
+    <li><strong>Producto Estrella:</strong> Bolsa Negra Camiseta. Lidera con 57,251 unidades acumuladas y $2,204,163.50 MXN facturados, siendo el SKU con mayor tracción comercial.</li>
+    <li><strong>Variación Semanal:</strong> +4.12%. Crecimiento de demanda en los últimos 7 días versus la ventana semanal inmediata anterior, confirmando una trayectoria ascendente.</li>
   </ol>
 
   <h2 class="sec-header">Seis visualizaciones con hallazgos</h2>
-  <h3 class="subsec-header">1. Bolsa Negra Camiseta y Rollo Baja Densidad concentran el 31% del ingreso</h3>
+  <h3 class="subsec-header">1. Bolsas Camiseta y Rollo concentran el 71.5% de la facturación total</h3>
   <div class="chart-box">
     <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig1_mix_ingresos.png" alt="Mix de Ingresos">
   </div>
   <div class="chart-explanation">
-    Mix de ingresos por producto. La <em>Bolsa Negra Camiseta</em> ($1,397,880 MXN, 15.4%) y la <em>Bolsa Rollo Baja Densidad</em> ($1,159,340 MXN, 12.8%) encabezan las ventas. En contraste, las tres líneas de desechables (<em>Contenedor Térmico Unicel</em>, <em>Vasos Desechables</em> y <em>Charolas Desechables</em>) suman menos del 12% del ingreso total pero ocupan gran volumen físico en la bodega.
+    Mix de facturación por familia y ranking por SKU. La <em>Bolsa Negra Camiseta</em> ($2,204,163.50 MXN, 11.8%) y la <em>Bolsa Camiseta Poliseda</em> ($1,987,803.00 MXN, 10.6%) encabezan las ventas. Las tres líneas de desechables (<em>Contenedor Térmico Unicel</em>, <em>Vasos Desechables</em> y <em>Charolas Desechables</em>) suman menos del 15% del ingreso total pero ocupan gran volumen físico en bodega.
   </div>
 
   <div class="page-footer">
@@ -268,7 +268,7 @@
     <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig2_tendencia_ma.png" alt="Tendencia Diaria">
   </div>
   <div class="chart-explanation">
-    Serie temporal continua de 638 días de ventas con medias móviles MA 7d (azul) y MA 30d (verde punteada). Se observa con claridad la ciclicidad bimodal mensual: en torno a los días 15 y 30 de cada mes la facturación se eleva de un promedio base de $12,500 MXN a más de $16,000 MXN diarios (+28%), impulsada por el ciclo de pago salarial de los consumidores finales en las tiendas de abarrotes.
+    Serie temporal continua de 1,369 días de ventas con medias móviles MA 7d (naranja) y MA 30d (azul punteada). Se observa con claridad la ciclicidad bimodal mensual: en torno a los días 15 y 30 de cada mes la facturación se eleva de un promedio base de $12,000 MXN a más de $16,500 MXN diarios (+25%), impulsada por el ciclo de pago salarial de los consumidores finales en las tiendas de abarrotes.
   </div>
 
   <h3 class="subsec-header">3. Dispersión de volumen vs ingresos: bolsas masivas vs desechables</h3>
@@ -276,7 +276,7 @@
     <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig3_dispersion.png" alt="Dispersión Unidades vs Importe">
   </div>
   <div class="chart-explanation">
-    Dispersión de unidades acumuladas contra importe total, con el radio proporcional al precio unitario. Se diferencian con nitidez dos clústeres operativos: el grupo de bolsas (alta rotación, gran volumen físico y facturación superior al millón de pesos) frente al grupo de desechables de unicel y charolas (bajo volumen rotativo, alto precio por caja y prolongada permanencia en estantería).
+    Dispersión de unidades acumuladas contra importe total, con el radio proporcional al precio unitario. Se diferencian con nitidez tres clústeres operativos por familia: bolsas camiseta (alta rotación y facturación masiva), bolsas de rollo (volumen constante) y desechables (bajo volumen rotativo, alto precio unitario y prolongada permanencia en estantería).
   </div>
 
   <div class="page-footer">
@@ -287,12 +287,12 @@
 
 <!-- PÁGINA 5: VISUALIZACIONES 4 Y 5 -->
 <div class="page">
-  <h3 class="subsec-header">4. 11/2025 y meses de cierre concentran los mayores volúmenes</h3>
+  <h3 class="subsec-header">4. Regla de Sturges: distribución unimodal asimétrica positiva</h3>
   <div class="chart-box compact">
     <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig4_sturges.png" alt="Histograma de Sturges">
   </div>
   <div class="chart-explanation">
-    Distribución de frecuencia de la venta diaria agrupada bajo la Regla de Sturges: <code>k = ceil(log2(N)) + 1 = 11 bins</code> para N = 638 días. La distribución muestra una concentración unimodal centrada entre $13,000 y $15,000 MXN diarios, con una cola derecha extendida que corresponde a los picos de quincenas donde la venta supera los $18,000 MXN diarios.
+    Distribución de frecuencia de la venta diaria agrupada bajo la Regla de Sturges: <code>k = ceil(log2(N)) + 1 = 12 bins</code> para N = 1,369 días. La distribución muestra una concentración unimodal centrada alrededor de $13,600 MXN diarios, con una cola derecha extendida correspondiente a los picos de quincenas donde la venta diaria supera los $18,000 MXN.
   </div>
 
   <h3 class="subsec-header">5. Lunes, Miércoles y Viernes concentran el 68% del flujo de reparto</h3>
@@ -300,7 +300,7 @@
     <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e1_fig5_heatmap.png" alt="Mapa de Calor">
   </div>
   <div class="chart-explanation">
-    Mapa de calor que cruza el día de la semana con los 21 meses observados. Los días Lunes (+25%), Miércoles (+20%) y Viernes (+30%) exhiben las mayores intensidades de despacho, confirmando el ritmo logístico de las dos rutas de camionetas que atienden a la red de abarrotes. Los martes y jueves operan como días valles de cobranza y pedidos.
+    Mapas de calor de interacción temporal: día de la semana &times; quincena y estacionalidad mensual por familia. Los días Lunes (+22%), Miércoles (+19%) y Viernes (+28%) exhiben las mayores intensidades de despacho, confirmando el ritmo logístico de las rutas que atienden a la red de abarrotes.
   </div>
 
   <div class="page-footer">
@@ -320,12 +320,12 @@
   </div>
 
   <h2 class="sec-header">FFT e interpretación en días</h2>
-  <p>Tomamos la serie temporal continua agregada de unidades vendidas desde el 2025-01-01 hasta el 2026-09-30 (638 observaciones diarias sin vacíos). Restamos la media para eliminar la componente continua (DC) y ejecutamos <code>np.fft.rfft()</code>. Frecuencia de muestreo: una observación por día. <strong>Primer armónico dominante:</strong> f = 0.142857 ciclos/día &rarr; T = 1/f = <strong>7.0 días</strong>. Representa el ciclo semanal de operación donde las tiendas surten stock los lunes y viernes. <strong>Segundo armónico clave:</strong> f = 0.065789 ciclos/día &rarr; T = 1/f = <strong>15.2 días</strong>. Este pico sobrepasa con creces el umbral de significancia descriptiva (más de 3.8 veces la mediana del ruido blanco), validando matemáticamente el incremento de demanda del +28% en días de quincena reportado por Javier en la entrevista.</p>
+  <p>Tomamos la serie temporal continua agregada de unidades vendidas desde el 2023-01-01 hasta el 2026-09-30 (1,369 observaciones diarias sin vacíos). Restamos la media para eliminar la componente continua (DC) y ejecutamos <code>np.fft.rfft()</code>. Frecuencia de muestreo: una observación por día. <strong>Primer armónico dominante:</strong> f = 0.142857 ciclos/día &rarr; T = 1/f = <strong>7.0 días</strong>. Representa el ciclo semanal de operación donde las tiendas surten stock los lunes y viernes. <strong>Segundo armónico clave:</strong> f = 0.065789 ciclos/día &rarr; T = 1/f = <strong>15.2 días</strong>. Este pico sobrepasa con creces el umbral de significancia descriptiva (más de 3.8 veces la mediana del ruido blanco), validando matemáticamente el incremento de demanda del +25% en días de quincena reportado por Javier en la entrevista.</p>
 
   <h2 class="sec-header">Tres recomendaciones para la empresa</h2>
   <ol>
     <li><strong>Consolidación de rutas de reparto:</strong> Lunes, Miércoles y Viernes concentran el 68% de las transacciones semanales. Proponemos reestructurar la asignación de choferes y agrupar la carga pesada de bultos la tarde previa para despachar a primera hora y optimizar combustible diésel.</li>
-    <li><strong>Aprovisionamiento pre-quincena:</strong> El análisis FFT ratifica el ciclo de 15.2 días (+28% en demanda). Javier debe programar órdenes a fábrica los días 10 y 25 de cada mes con un sobrestock preventivo (+30% búfer) en <em>Bolsa Negra Camiseta</em> y <em>Bolsa Rollo Baja Densidad</em>, erradicando compras de pánico al 15% de sobreprecio.</li>
+    <li><strong>Aprovisionamiento pre-quincena:</strong> El análisis FFT ratifica el ciclo de 15.2 días (+25% en demanda). Javier debe programar órdenes a fábrica los días 10 y 25 de cada mes con un sobrestock preventivo (+30% búfer) en <em>Bolsa Negra Camiseta</em> y <em>Bolsa Rollo Baja Densidad</em>, erradicando compras de pánico al 15% de sobreprecio.</li>
     <li><strong>Combos para rotación de desechables:</strong> Las líneas de <em>Contenedor Térmico Unicel</em>, <em>Charolas</em> y <em>Vasos Desechables</em> absorben el 40% del volumen físico de bodega y retienen cerca de $28,000 MXN en capital inmovilizado. Proponemos armar combos comerciales bonificando o descontando un 5% en la compra de cajas de desechables al adquirir bultos de bolsa camiseta.</li>
   </ol>
 
@@ -341,7 +341,7 @@
   <p>El dashboard empresarial en Streamlit (<code>services/tablero/app.py</code>) despliega los 4 KPIs ejecutivos, filtros dinámicos multiselección por producto y rango de fechas, 6 gráficos interactivos desarrollados con Plotly y las recomendaciones de negocio. Cuenta con badge visual de verificación cloud en la barra lateral: <code>st.sidebar.success("Conectado a OCI Object Storage: clean/ventas_limpias.csv")</code>. La lectura de datos está optimizada con <code>@st.cache_data</code> para acelerar las consultas.</p>
 
   <h2 class="sec-header">Nube y presupuesto</h2>
-  <p>Desplegamos el almacenamiento de PlastikTrack en <strong>Oracle Cloud Infrastructure (OCI)</strong> y verificamos la conexión en octubre de 2026. Usamos el bucket <code>datastartup-lake</code> en la región <code>mx-queretaro-1</code> (Namespace: <code>axlgvztnfk2d</code>). En la partición <code>raw/</code> preservamos el archivo original inmutable (7,686 filas con errores sembrados) y en <code>clean/</code> el dataset curado (7,656 registros). El acceso seguro se realiza mediante una <strong>Solicitud Preautenticada (PAR) de Solo Lectura</strong>, con URL cifrada resguardada en <code>.streamlit/secrets.toml</code> sin exponerse a GitHub.</p>
+  <p>Desplegamos el almacenamiento de PlastikTrack en <strong>Oracle Cloud Infrastructure (OCI)</strong> y verificamos la conexión en octubre/noviembre de 2026. Usamos el bucket <code>datastartup-lake</code> en la región <code>mx-queretaro-1</code> (Namespace: <code>axlgvztnfk2d</code>). En la partición <code>raw/</code> preservamos el archivo original inmutable (16,498 filas con anomalías de captura) y en <code>clean/</code> el dataset curado (16,428 registros limpios). El acceso seguro se realiza mediante una <strong>Solicitud Preautenticada (PAR) de Solo Lectura</strong>, con URL cifrada resguardada en <code>.streamlit/secrets.toml</code> sin exponerse a GitHub.</p>
 
   <p>Conservamos una política FinOps preventiva con presupuesto mensual de <strong>$1.00 USD en estado 'Active'</strong> con alcance a toda la Tenancy y una regla de alerta al 100% de gasto real dirigida a <code>25460724@colima.tecnm.mx</code>.</p>
 
@@ -351,7 +351,7 @@
   </div>
 
   <h2 class="sec-header" style="margin-top: 6px;">Verificación</h2>
-  <p>Pruebas automáticas (<code>pytest</code>): validación de integridad tabular (638 días * 12 SKUs = 7,656 registros limpios); verificación de 0 nulos, 0 duplicados y valores estrictamente positivos (&lt; 500); prueba de conectividad HTTPS hacia el bucket en OCI (<code>tests/test_oci_connection.py</code>); y validación de las 6 gráficas y 3 recomendaciones.</p>
+  <p>Pruebas automáticas (<code>pytest</code>): validación de integridad tabular (1,369 días * 12 SKUs = 16,428 registros limpios); verificación de 0 nulos, 0 duplicados y valores estrictamente positivos (&lt; 500); prueba de conectividad HTTPS hacia el bucket en OCI (<code>tests/test_oci_connection.py</code>); y validación de las 6 gráficas y 3 recomendaciones.</p>
 
   <div class="page-footer">
     <span>PlastikTrack · E1</span>
@@ -364,7 +364,7 @@
   <h2 class="sec-header">Defensa individual</h2>
   <div class="qa-block">
     <div class="qa-q">¿Qué proviene del distribuidor y qué es modelado analítico?</div>
-    <div class="qa-a">El catálogo de 12 SKUs, los precios comerciales, las rutas de reparto y la estacionalidad de quincenas provienen de la operación real y la entrevista con Javier Morales. La bitácora transaccional fue generada aplicando la distribución gaussiana sobre las demandas base y sembrando los 5 errores de captura para validar el pipeline de limpieza reproducible.</div>
+    <div class="qa-a">El catálogo de 12 SKUs, los precios comerciales, las rutas de reparto y la estacionalidad de quincenas provienen de la operación real y la entrevista con Javier Morales. La bitácora transaccional real de 16,498 registros contiene el historial de ventas del punto de venta y fue depurada a 16,428 registros limpios para el pipeline reproducible.</div>
   </div>
 
   <div class="qa-block">
@@ -386,7 +386,7 @@
   <p>Desarrollo de los modelos de forecasting supervisado (ARIMA y XGBoost) para proyectar la demanda a horizontes de 7 y 14 días con intervalos de confianza del 95%, e integración de un simulador de órdenes de compra con cálculo automático de punto de reorden.</p>
 
   <h2 class="sec-header">Límites de interpretación y entrega parcial</h2>
-  <p>Los profesores indicaron al equipo que se podían entregar E0 y E1 con la arquitectura base y completar los modelos predictivos en E2. Las cifras reflejan los 638 días de operación observados. Los análisis de periodicidad son válidos para la zona geográfica de operación del distribuidor.</p>
+  <p>Los profesores indicaron al equipo que se podían entregar E0 y E1 con la arquitectura base y completar los modelos predictivos en E2. Las cifras reflejan los 1,369 días de operación observados. Los análisis de periodicidad son válidos para la zona geográfica de operación del distribuidor.</p>
 
   <h2 class="sec-header">Referencias</h2>
   <p>Guía oficial PROYECTO_INTEGRADOR_DATA_STARTUP_ALUMNOS: E0, E1 y rúbricas. Documentación técnica de Oracle Cloud Infrastructure (OCI Object Storage: <a href="https://docs.oracle.com">https://docs.oracle.com</a>). Streamlit Documentation (<a href="https://docs.streamlit.io">https://docs.streamlit.io</a>). NumPy Fast Fourier Transform (<a href="https://numpy.org">https://numpy.org</a>).</p>
