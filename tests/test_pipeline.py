@@ -13,8 +13,8 @@ def test_ventas_limpias_integridad():
     
     df = pd.read_csv(ruta)
     
-    # 1. Dimensión esperada: 638 días * 12 productos = 7,656 registros
-    assert len(df) == 7656, f"Se esperaban 7656 registros, se obtuvieron {len(df)}"
+    # 1. Dimensión esperada: 1,369 días * 12 productos = 16,428 registros
+    assert len(df) == 16428, f"Se esperaban 16428 registros, se obtuvieron {len(df)}"
     
     # 2. Sin nulos en ninguna columna
     assert df.isna().sum().sum() == 0, "Existen valores nulos en el dataset limpio"
