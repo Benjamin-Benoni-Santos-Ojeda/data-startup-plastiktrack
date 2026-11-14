@@ -19,10 +19,10 @@ if %ERRORLEVEL% neq 0 (
 
 echo Subiendo ramas y etiquetas a GitHub...
 git push -u origin main
-git push origin --tags
+git push origin --tags --force
 
 echo.
 echo ===================================================
-echo Proceso terminado.
+echo Proceso terminado exitosamente.
 echo ===================================================
 pause
