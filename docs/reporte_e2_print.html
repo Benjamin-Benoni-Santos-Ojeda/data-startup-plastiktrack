@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PlastikTrack · E2 | Modelos Predictivos y Recomendación de Compras</title>
+<style>
+  @page {
+    size: letter;
+    margin: 14mm 18mm 14mm 18mm;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.38;
+    font-size: 8.9pt;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .page {
+    height: 250mm;
+    max-height: 250mm;
+    position: relative;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    padding-bottom: 22px;
+  }
+
+  .page:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .page-footer {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: #64748b;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 4px;
+    line-height: 1;
+  }
+
+  /* Portada */
+  .cover {
+    padding-top: 35px;
+  }
+  .cover-title {
+    font-size: 38pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+  }
+  .cover-subtitle {
+    font-size: 13pt;
+    color: #334155;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+  }
+  .cover-stage {
+    font-size: 13pt;
+    color: #0f172a;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+  }
+  .cover-date {
+    font-size: 10pt;
+    color: #64748b;
+    margin: 0 0 34px 0;
+  }
+  .cover-section-title {
+    font-size: 9.8pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 18px 0 3px 0;
+  }
+  .cover-text {
+    font-size: 9.6pt;
+    color: #334155;
+    margin: 0 0 3px 0;
+    line-height: 1.35;
+  }
+
+  /* Encabezados interiores */
+  h1.doc-header {
+    font-size: 18pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 12px 0;
+    border-bottom: 2px solid #0284c7;
+    padding-bottom: 6px;
+    line-height: 1.2;
+  }
+  h2.sec-header {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 10px 0 5px 0;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 3px;
+  }
+  h3.subsec-header {
+    font-size: 9.4pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin: 8px 0 3px 0;
+  }
+
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0 10px 0;
+    font-size: 8.2pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 6px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  .chart-box {
+    text-align: center;
+    margin: 6px 0;
+  }
+  .chart-box img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+  }
+  .chart-explanation {
+    font-size: 7.9pt;
+    color: #334155;
+    background: #f8fafc;
+    border-left: 3px solid #0284c7;
+    padding: 5px 8px;
+    margin: 4px 0 8px 0;
+    line-height: 1.32;
+    text-align: justify;
+  }
+
+  .callout-box {
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    padding: 6px 10px;
+    margin: 6px 0;
+    font-size: 8.2pt;
+    color: #166534;
+  }
+
+  code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 8pt;
+    background: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #0f172a;
+  }
+
+  ol, ul {
+    margin: 3px 0 8px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1: PORTADA -->
+<div class="page cover">
+  <div class="cover-title">PlastikTrack</div>
+  <div class="cover-subtitle">Proyecto Integrador Data Startup</div>
+  <div class="cover-stage">E2 | Modelos Predictivos y Recomendación de Compras</div>
+  <div class="cover-date">Noviembre de 2026</div>
+
+  <div class="cover-section-title">Proyecto</div>
+  <div class="cover-text">PlastikTrack · data-startup-plastiktrack</div>
+
+  <div class="cover-section-title">Institución y carrera</div>
+  <div class="cover-text">Tecnológico Nacional de México, campus Colima</div>
+  <div class="cover-text">Ingeniería en Inteligencia Artificial</div>
+
+  <div class="cover-section-title">Asignaturas</div>
+  <div class="cover-text">Cómputo en la Nube (IAD-2408) y Analítica de Datos (IAD-2403)</div>
+
+  <div class="cover-section-title">Profesores</div>
+  <div class="cover-text">Mónico Sánchez Velasco · Cómputo en la Nube</div>
+  <div class="cover-text">Armando Román Gallardo Heredia · Analítica de Datos</div>
+
+  <div class="cover-section-title">Cliente</div>
+  <div class="cover-text">Distribuidora de Plásticos y Desechables San Juan (Javier Morales)</div>
+
+  <div class="cover-section-title">Autores</div>
+  <div class="cover-text">Benjamin Benoni Santos Ojeda</div>
+  <div class="cover-text" style="color: #64748b; font-size: 8.8pt;">Cloud Lead, matrícula 25460724</div>
+  <div style="height: 5px;"></div>
+  <div class="cover-text">Juan Carrillo Orozco</div>
+  <div class="cover-text" style="color: #64748b; font-size: 8.8pt;">Data Lead, matrícula 25460331</div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E2</span>
+    <span>1</span>
+  </div>
+</div>
+
+<!-- PÁGINA 2: PROBLEMA, JUSTIFICACIÓN Y VARIABLE OBJETIVO -->
+<div class="page">
+  <h1 class="doc-header">E2. Modelos Predictivos y Recomendación de Compras</h1>
+
+  <h2 class="sec-header">1. Definición del problema en la industria de plásticos</h2>
+  <p>En la cadena de suministro mayorista de empaques plásticos (bolsas de polietileno, películas estirables y contenedores desechables), los distribuidores abastecen a miles de tiendas de abarrotes, fondas y puestos de comida. Este eslabón enfrenta dos fallas operativas simultáneas que merman drásticamente el margen financiero:</p>
+  <p>1) <strong>Quiebres de stock sistemáticos:</strong> En productos de alta rotación (bolsa negra camiseta y rollo) durante los picos de quincena (+28.2%) y días de reparto (lunes, miércoles y viernes, +58.4%). Ante el desabasto, el distribuidor realiza compras de emergencia a otros mayoristas con un sobreprecio de ~15%, perdiendo más de $2,000 MXN de utilidad neta por quiebre.</p>
+  <p>2) <strong>Sobreinventario y capital estancado:</strong> En líneas voluminosas de baja rotación (charolas, vasos y contenedores térmicos de unicel), que se compran por caja cerrada y tardan semanas en venderse, ocupando más del 40% del espacio de bodega física con dinero detenido.</p>
+
+  <h2 class="sec-header">2. Justificación y formulación analítica</h2>
+  <p><strong>Pregunta de negocio:</strong> ¿Cuántas unidades de cada producto debe pedir el distribuidor para no quedarse sin stock en quincenas y días pico, sin inmovilizar capital en desechables lentos? <strong>Pregunta analítica:</strong> ¿Qué factores de calendario, estacionalidad, precio y memoria histórica explican las unidades vendidas por SKU, y qué tan bien se pueden predecir a 14 días?</p>
+
+  <table>
+    <thead>
+      <tr><th style="width: 28%;">Elemento Metodológico</th><th>Definición y Justificación Operativa en PlastikTrack</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Variable objetivo</strong></td>
+        <td><code>unidades</code> (unidades físicas vendidas por SKU y día).</td>
+      </tr>
+      <tr>
+        <td><strong>Tipo de problema</strong></td>
+        <td><strong>Regresión supervisada</strong> (variable cuantitativa entera continua, no negativa).</td>
+      </tr>
+      <tr>
+        <td><strong>Por qué regresión y no clasificación</strong></td>
+        <td>La compra se decide en cantidades físicas; un pronóstico cuantitativo permite dimensionar inventarios y calcular el stock de seguridad analítico con el error del modelo. Una clasificación binaria (quiebre / no quiebre) perdería la magnitud del pedido sugerido.</td>
+      </tr>
+      <tr>
+        <td><strong>Horizonte de predicción</strong></td>
+        <td><strong>14 días</strong> (igual al tiempo de reposición o lead time del fabricante).</td>
+      </tr>
+      <tr>
+        <td><strong>Métricas de éxito</strong></td>
+        <td><strong>WAPE</strong> (Weighted Absolute Percentage Error) y <strong>MAE</strong> frente a la línea base ingenua de repetir lo vendido hace 14 días.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout-box">
+    <strong>Sin fuga de información:</strong> La variable <code>total</code> (= unidades &times; precio) se excluye de las características explicativas porque contiene directamente la variable objetivo. Los rezagos autorregresivos se restringen a &ge; 14 días para asegurar que son conocidos al momento de la orden.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E2</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- PÁGINA 3: DATASET Y VARIABLES EXPLICATIVAS -->
+<div class="page">
+  <h2 class="sec-header">3. Dataset transaccional y variables explicativas</h2>
+  <p>Se analiza el historial depurado de la distribuidora compuesto por <strong>16,428 registros limpios</strong> distribuidos en un panel continuo de <strong>1,369 días</strong> (del 1 de enero de 2023 al 30 de septiembre de 2026, 45 meses) para los 12 SKUs del catálogo. El dataset cuenta con panel balanceado (1,369 días &times; 12 productos) sin faltantes temporales.</p>
+
+  <h3 class="subsec-header">Diccionario de variables explicativas (Features)</h3>
+  <table>
+    <thead>
+      <tr><th>Variable</th><th>Tipo</th><th>Descripción y Relevancia en el Negocio</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>prod_cod</code></td><td>Categórica nominal</td><td>Código numérico del SKU (12 productos en 3 familias funcionales).</td></tr>
+      <tr><td><code>dia_semana</code></td><td>Ordinal (0 a 6)</td><td>Día de la semana (0=Lunes a 6=Domingo).</td></tr>
+      <tr><td><code>es_dia_reparto</code></td><td>Binaria (0 / 1)</td><td>1 si es Lunes, Miércoles o Viernes (rutas activas de camionetas).</td></tr>
+      <tr><td><code>dia_mes</code></td><td>Entera (1 a 31)</td><td>Día calendario del mes para capturar dinámicas intra-mensuales.</td></tr>
+      <tr><td><code>es_quincena</code></td><td>Binaria (0 / 1)</td><td>1 para días 13 al 16 y fin de mes (&ge; 28), ciclo de nómina comercial.</td></tr>
+      <tr><td><code>mes</code></td><td>Entera (1 a 12)</td><td>Mes del año para capturar estacionalidad anual y fiestas de fin de año.</td></tr>
+      <tr><td><code>tendencia</code></td><td>Entera continua</td><td>Días transcurridos desde el inicio del historial (crecimiento orgánico).</td></tr>
+      <tr><td><code>precio_unitario</code></td><td>Numérica continua</td><td>Precio mayorista vigente en MXN pactado con la red de abarrotes.</td></tr>
+      <tr><td><code>lag_14</code></td><td>Entera (&ge; 0)</td><td>Demanda real observada hace exactamente 14 días (horizonte operativo).</td></tr>
+      <tr><td><code>lag_21</code></td><td>Entera (&ge; 0)</td><td>Demanda observada hace 21 días (estacionalidad semanal rezagada).</td></tr>
+      <tr><td><code>media_28_lag14</code></td><td>Continua (&ge; 0)</td><td>Promedio móvil de 28 días calculado a partir de $t-14$ hacia atrás.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="subsec-header">Estadísticas descriptivas de variables numéricas</h3>
+  <table>
+    <thead>
+      <tr><th>Variable</th><th>Media</th><th>Desv. Est.</th><th>Mediana</th><th>IQR</th><th>Mínimo</th><th>Máximo</th><th>CV (%)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>unidades</code> (objetivo)</td><td>25.05</td><td>15.89</td><td>24.00</td><td>20.00</td><td>1.00</td><td>78.00</td><td>63.4%</td></tr>
+      <tr><td><code>precio_unitario</code> (MXN)</td><td>$49.53</td><td>$15.18</td><td>$44.25</td><td>$18.50</td><td>$29.50</td><td>$95.50</td><td>30.7%</td></tr>
+      <tr><td><code>total</code> (MXN)</td><td>$1,136.65</td><td>$782.14</td><td>$986.00</td><td>$770.00</td><td>$29.50</td><td>$5,157.00</td><td>68.8%</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Lectura analítica:</strong> La media de unidades (25.05) se ubica ligeramente por encima de la mediana (24.00) con asimetría positiva moderada (+0.47). El coeficiente de variación del 63.4% en el conjunto global refleja la coexistencia de productos de escalas muy dispares: desde la <em>Bolsa Negra Camiseta</em> (mediana 42 u/día) hasta el <em>Contenedor Térmico Unicel</em> (mediana 9 u/día).</p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E2</span>
+    <span>3</span>
+  </div>
+</div>
+
+<!-- PÁGINA 4: DISTRIBUCIONES DE DEMANDA POR SKU -->
+<div class="page">
+  <h2 class="sec-header">4. Análisis exploratorio I: Distribución de la variable objetivo</h2>
+  <p>El comportamiento de <code>unidades</code> evidencia que la demanda global no sigue una distribución gaussiana simétrica, sino una mezcla multimodal originada por la combinación de productos rápidos y lentos, complementada con colas derechas en picos de quincena.</p>
+
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e2_fig1_distribucion_objetivo.png" alt="Distribución Demanda Diaria" style="max-height: 52mm;">
+  </div>
+  <div class="chart-explanation">
+    Figura 1: Histograma lineal con media y mediana, transformación logarítmica normalizada y boxplot por familia de producto. Las bolsas tipo camiseta presentan la mayor variabilidad y volumen medio, mientras que los desechables se concentran en el cuartil inferior de rotación.
+  </div>
+
+  <h3 class="subsec-header">Dispersión y rotación operativa por SKU</h3>
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e2_fig2_boxplot_productos.png" alt="Boxplots por SKU" style="max-height: 65mm;">
+  </div>
+  <div class="chart-explanation">
+    Figura 2: Diagrama de caja y bigotes por producto ordenado por mediana. Se confirma la jerarquía de demanda: <em>Bolsa Negra Camiseta</em> (mediana 42 u), <em>Bolsa Rollo Baja Densidad</em> (36 u) y <em>Bolsa Camiseta Poliseda</em> (35 u) encabezan el volumen. En el extremo inferior, las tres líneas de desechables (<em>Charolas</em>, <em>Vasos</em> y <em>Contenedores Térmicos</em>) registran medianas de 8 a 12 u/día.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E2</span>
+    <span>4</span>
+  </div>
+</div>
+
+<!-- PÁGINA 5: PATRONES DE CALENDARIO Y PRUEBAS ESTADÍSTICAS -->
+<div class="page">
+  <h2 class="sec-header">5. Análisis exploratorio II: Patrones de calendario y pruebas estadísticas</h2>
+  <p>Para comprobar si los efectos reportados en la entrevista son estadísticamente significativos o mero ruido aleatorio, se ejecutaron pruebas de hipótesis no paramétricas sobre la variable objetivo normalizada por SKU (<code>unid_rel = unidades &divide; media_producto</code>):</p>
+
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e2_fig3_patrones_calendario.png" alt="Patrones de Calendario" style="max-height: 68mm;">
+  </div>
+  <div class="chart-explanation">
+    Figura 3: Dinámica de calendario. Superior izquierda: Días de reparto (L-M-V) con índice &gt; 1.25 vs días valle (domingo = 0.65). Superior derecha: Días de quincena (13–16 y &ge;28) sombreados en rojo. Inferior izquierda: Estacionalidad mensual por familia. Inferior derecha: Crecimiento orgánico mensual (+57.7% en historial).
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Hipótesis / Patrón Evaluado</th><th>Grupo A vs Grupo B</th><th>Estadístico</th><th>p-value</th><th>Conclusión Técnica</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Efecto Quincena</strong></td>
+        <td>Quincena (1.20) vs Ordinario (0.94)</td>
+        <td>Mann-Whitney $U$</td>
+        <td>$1.06 \times 10^{-258}$</td>
+        <td>Significativo ($+28.2\%$ demanda). Se incluye variable <code>es_quincena</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Días de Reparto</strong></td>
+        <td>Lunes/Mié/Vie (1.27) vs Resto (0.80)</td>
+        <td>Mann-Whitney $U$</td>
+        <td>$0.00 \times 10^{0}$</td>
+        <td>Significativo ($+58.4\%$ demanda). Se incluye <code>es_dia_reparto</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Efecto Día de la Semana</strong></td>
+        <td>Entre los 7 días de la semana</td>
+        <td>Kruskal-Wallis $H=9,080.7$</td>
+        <td>$0.00 \times 10^{0}$</td>
+        <td>Diferencias masivas entre días. Viernes es pico, Domingo valle.</td>
+      </tr>
+      <tr>
+        <td><strong>Efecto Estacional Mes</strong></td>
+        <td>Entre los 12 meses del año</td>
+        <td>Kruskal-Wallis $H=492.7$</td>
+        <td>$1.18 \times 10^{-98}$</td>
+        <td>Diciembre registra el mayor pico por festividades y cenas.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E2</span>
+    <span>5</span>
+  </div>
+</div>
+
+<!-- PÁGINA 6: MODELADO PREDICTIVO Y VALIDACIÓN TEMPORAL -->
+<div class="page">
+  <h2 class="sec-header">6. Modelado predictivo y validación temporal</h2>
+  <p>Se evaluó un algoritmo de ensamble basado en árboles de gradiente aumentado (<code>HistGradientBoostingRegressor</code>) diseñado para capturar no-linealidades, interacciones de calendario y variables categóricas, contrastado contra dos líneas base de referencia operativa.</p>
+
+  <h3 class="subsec-header">Estrategia de validación temporal (Backtesting)</h3>
+  <p>Para evitar fuga de información cronológica, se utilizó una partición estrictamente temporal: <strong>Entrenamiento:</strong> 15,024 registros (28/01/2023 al 02/07/2026). <strong>Prueba independiente:</strong> 1,080 registros correspondientes a los últimos 56 días de operación comercial (03/07/2026 al 30/09/2026).</p>
+
+  <table>
+    <thead>
+      <tr><th>Modelo Evaluado</th><th>MAE (u)</th><th>RMSE (u)</th><th>WAPE (%)</th><th>$R^2$</th><th>Reducción de Error vs Base</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Referencia 1: Venta hace 14 días (<code>lag_14</code>)</td><td>5.11</td><td>7.30</td><td>16.67%</td><td>0.82</td><td>Línea Base Ingenua</td></tr>
+      <tr><td>Referencia 2: Promedio Móvil 28 días (<code>MA28</code>)</td><td>8.18</td><td>10.80</td><td>26.70%</td><td>0.61</td><td>Descartado (+60% error)</td></tr>
+      <tr><td><strong>Modelo Propuesto: HistGradientBoosting</strong></td><td><strong>3.37</strong></td><td><strong>4.87</strong></td><td><strong>11.00%</strong></td><td><strong>0.92</strong></td><td><strong>-34.0% de error WAPE</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e2_fig5_desempeno_modelo.png" alt="Desempeño del Modelo" style="max-height: 58mm;">
+  </div>
+  <div class="chart-explanation">
+    Figura 4: Desempeño predictivo sobre la ventana de prueba de 56 días. Izquierda: Demanda agregada diaria de la distribuidora (R² = 0.92). Derecha: Pronóstico específico sobre el producto estrella <em>Bolsa Negra Camiseta</em>, siguiendo con alta precisión las oscilaciones de quincena y días de reparto.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E2</span>
+    <span>6</span>
+  </div>
+</div>
+
+<!-- PÁGINA 7: IMPORTANCIA DE VARIABLES Y RECOMENDACIÓN DE PEDIDOS -->
+<div class="page">
+  <h2 class="sec-header">7. Importancia de variables y motor de compras a 14 días</h2>
+  <p>La inspección de importancia por permutación sobre el conjunto de prueba confirma que la memoria autorregresiva reciente (<code>lag_14</code> y <code>media_28_lag14</code>) combinada con las señales de quincena y día de reparto son los predictores dominantes:</p>
+
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e2_fig6_importancia_variables.png" alt="Importancia de Variables" style="max-height: 48mm;">
+  </div>
+  <div class="chart-explanation">
+    Figura 5: Importancia de características calculada mediante pérdida de MAE al permutar valores. La demanda observada hace 14 días aporta más del 40% del poder explicativo, respaldada por la categoría del producto y el calendario salarial.
+  </div>
+
+  <h3 class="subsec-header">Plan operativo de compras (Horizonte 01/10/2026 al 14/10/2026)</h3>
+  <p>El pronóstico se convierte en recomendación de pedido mediante: <code>Pedido = Pronóstico_14d + Stock_Seguridad - Inventario_Actual</code>, calculando el stock de seguridad analítico con $Z=1.65$ ($\approx 95\%$ de nivel de servicio):</p>
+
+  <table>
+    <thead>
+      <tr><th>Producto (SKU)</th><th>Pronóstico 14d</th><th>Stock Seguridad (95%)</th><th>Inventario en Bodega</th><th><strong>Pedido Sugerido (u)</strong></th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Bolsa Negra Camiseta</strong></td><td>683 u</td><td>45 u</td><td>0 u</td><td><strong>728 bultos</strong></td></tr>
+      <tr><td><strong>Bolsa Camiseta Poliseda</strong></td><td>599 u</td><td>41 u</td><td>0 u</td><td><strong>640 bultos</strong></td></tr>
+      <tr><td><strong>Bolsa Rollo Baja Densidad</strong></td><td>596 u</td><td>41 u</td><td>0 u</td><td><strong>637 bultos</strong></td></tr>
+      <tr><td><strong>Bolsa Basura Todos Tamanios</strong></td><td>545 u</td><td>33 u</td><td>0 u</td><td><strong>579 bultos</strong></td></tr>
+      <tr><td><strong>Bolsa Rollo Alta Densidad</strong></td><td>525 u</td><td>29 u</td><td>0 u</td><td><strong>554 bultos</strong></td></tr>
+      <tr><td><strong>Bolsa Rollo Poliseda</strong></td><td>480 u</td><td>29 u</td><td>0 u</td><td><strong>509 bultos</strong></td></tr>
+      <tr><td><strong>Bolsa Camiseta Color</strong></td><td>428 u</td><td>30 u</td><td>0 u</td><td><strong>458 bultos</strong></td></tr>
+      <tr><td><strong>Bolsa Camiseta Plata</strong></td><td>376 u</td><td>26 u</td><td>0 u</td><td><strong>402 bultos</strong></td></tr>
+      <tr><td><strong>Pelicula Plastica Emplaye</strong></td><td>248 u</td><td>17 u</td><td>0 u</td><td><strong>265 rollos</strong></td></tr>
+      <tr><td><strong>Vasos Desechables</strong></td><td>214 u</td><td>16 u</td><td>0 u</td><td><strong>230 cajas</strong></td></tr>
+      <tr><td><strong>Charolas Desechables</strong></td><td>169 u</td><td>15 u</td><td>0 u</td><td><strong>184 cajas</strong></td></tr>
+      <tr><td><strong>Contenedor Termico Unicel</strong></td><td>148 u</td><td>13 u</td><td>0 u</td><td><strong>162 cajas</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E2</span>
+    <span>7</span>
+  </div>
+</div>
+
+<!-- PÁGINA 8: CONCLUSIONES Y DEFENSA INDIVIDUAL -->
+<div class="page">
+  <h2 class="sec-header">8. Conclusiones y defensa individual</h2>
+  <div class="callout-box" style="margin-bottom: 8px;">
+    <strong>Impacto económico cuantificable:</strong> Al anticipar los pedidos con 14 días y blindar los picos de quincena mediante stock de seguridad dinámico, Javier elimina las compras de emergencia al 15% de sobreprecio (ahorro proyectado &gt; $8,000 MXN mensuales) y evita inmovilizar capital en desechables lentos.
+  </div>
+
+  <h3 class="subsec-header">Preguntas clave de defensa individual</h3>
+  <div style="font-size: 8.2pt; line-height: 1.35;">
+    <p><strong>1. ¿Por qué se utilizó un horizonte de 14 días y no 1 o 7 días?</strong><br>
+    Porque 14 días coincide con el lead time real que tarda el fabricante en despachar pedidos mayoristas a la bodega de Javier. Un pronóstico a 1 día sería inútil operativamente para emitir órdenes de compra a fábrica.</p>
+
+    <p><strong>2. ¿Cómo se garantiza que no existe fuga de información (data leakage)?</strong><br>
+    Se eliminó la columna <code>total</code> (unidades &times; precio) y los rezagos de ventas se configuraron con un desplazamiento mínimo de $t-14$ (<code>lag_14</code>, <code>lag_21</code>). La validación se realizó mediante corte temporal (últimos 56 días), nunca con muestreo aleatorio.</p>
+
+    <p><strong>3. ¿Por qué WAPE y no MAPE como métrica principal?</strong><br>
+    El MAPE divide entre el valor real de cada observación, distorsionándose cuando las ventas de productos lentos son de 1 o 2 unidades. El WAPE pondera el error absoluto sobre la suma total de unidades, siendo la métrica estándar de la industria retail y supply chain.</p>
+  </div>
+
+  <h2 class="sec-header">9. Repositorio Git y entrega técnica</h2>
+  <p>• <strong>Repositorio GitHub:</strong> <a href="https://github.com/Benjamin-Benoni-Santos-Ojeda/data-startup-plastiktrack">https://github.com/Benjamin-Benoni-Santos-Ojeda/data-startup-plastiktrack</a><br>
+  • <strong>Etiqueta Oficial de Entrega:</strong> <code>git tag e2</code><br>
+  • <strong>Notebook Oficial Ejecutado:</strong> <code>notebooks/EDA_PlastikTrack_Avance1.ipynb</code> (100% de celdas con salidas y gráficas guardadas).<br>
+  • <strong>Pipeline de Modelado:</strong> <code>services/modelos/generar_figuras_e2.py</code>.</p>
+
+  <h2 class="sec-header">10. Preparación hacia la Entrega E3</h2>
+  <p>Para la entrega E3, el modelo predictivo <code>HistGradientBoostingRegressor</code> se empaquetará como una API REST desacoplada mediante FastAPI en un contenedor Docker, desplegada sobre la instancia Ampere A1 Always Free de OCI y orquestada con Kubernetes/Terraform, conectando directamente los pronósticos a 14 días con el tablero interactivo de Streamlit.</p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E2</span>
+    <span>8</span>
+  </div>
+</div>
+
+</body>
+</html>
