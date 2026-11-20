@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PlastikTrack · E3 | Infraestructura en la Nube, Contenerización y Microservicios</title>
+<style>
+  @page {
+    size: letter;
+    margin: 14mm 18mm 14mm 18mm;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.36;
+    font-size: 8.8pt;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .page {
+    height: 250mm;
+    max-height: 250mm;
+    position: relative;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    padding-bottom: 22px;
+  }
+
+  .page:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .page-footer {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: #64748b;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 4px;
+    line-height: 1;
+  }
+
+  /* Portada */
+  .cover {
+    padding-top: 30px;
+  }
+  .cover-title {
+    font-size: 36pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 14px 0;
+    letter-spacing: -0.02em;
+  }
+  .cover-subtitle {
+    font-size: 13pt;
+    color: #334155;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+  }
+  .cover-stage {
+    font-size: 13pt;
+    color: #0f172a;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+  }
+  .cover-date {
+    font-size: 10pt;
+    color: #64748b;
+    margin: 0 0 28px 0;
+  }
+  .cover-section-title {
+    font-size: 9.8pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 16px 0 3px 0;
+  }
+  .cover-text {
+    font-size: 9.5pt;
+    color: #334155;
+    margin: 0 0 3px 0;
+    line-height: 1.35;
+  }
+
+  /* Encabezados interiores */
+  h1.doc-header {
+    font-size: 17pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid #0284c7;
+    padding-bottom: 5px;
+    line-height: 1.2;
+  }
+  h2.sec-header {
+    font-size: 10.8pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 9px 0 4px 0;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 3px;
+  }
+  h3.subsec-header {
+    font-size: 9.2pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin: 7px 0 3px 0;
+  }
+
+  p {
+    margin: 0 0 5px 0;
+    text-align: justify;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 5px 0 8px 0;
+    font-size: 8.2pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 3.5px 5.5px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  .chart-box {
+    text-align: center;
+    margin: 5px 0;
+  }
+  .chart-box img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+  }
+  .chart-explanation {
+    font-size: 7.9pt;
+    color: #334155;
+    background: #f8fafc;
+    border-left: 3px solid #0284c7;
+    padding: 4px 7px;
+    margin: 3px 0 6px 0;
+    line-height: 1.3;
+  }
+
+  .callout-box {
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    padding: 6px 9px;
+    margin: 5px 0 7px 0;
+    font-size: 8.2pt;
+    line-height: 1.32;
+  }
+  .callout-box strong {
+    color: #15803d;
+  }
+
+  .code-snippet {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 6px 9px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 7.6pt;
+    line-height: 1.25;
+    margin: 4px 0 7px 0;
+    overflow-x: hidden;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 1.5px 5px;
+    border-radius: 3px;
+    font-size: 7.5pt;
+    font-weight: 600;
+  }
+  .badge-success { background: #dcfce7; color: #166534; }
+  .badge-info { background: #e0f2fe; color: #0369a1; }
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     PÁGINA 1: PORTADA OFICIAL INSTITUCIONAL
+     ========================================== -->
+<div class="page cover">
+  <div class="cover-title">PlastikTrack</div>
+  <div class="cover-subtitle">Proyecto Integrador Data Startup</div>
+  <div class="cover-stage">E3 | Infraestructura en la Nube, Contenerización y Microservicios</div>
+  <div class="cover-date">Noviembre de 2026</div>
+
+  <div class="cover-section-title">Proyecto</div>
+  <div class="cover-text">PlastikTrack (<code>data-startup-plastiktrack</code>)</div>
+
+  <div class="cover-section-title">Institución y carrera</div>
+  <div class="cover-text">Tecnológico Nacional de México, campus Colima</div>
+  <div class="cover-text">Ingeniería en Inteligencia Artificial</div>
+
+  <div class="cover-section-title">Asignaturas y docentes</div>
+  <div class="cover-text"><strong>Cómputo en la Nube (IAD-2408)</strong> · Mtro. Mónico Sánchez Velasco</div>
+  <div class="cover-text"><strong>Analítica de Datos (IAD-2403)</strong> · Mtro. Armando Román Gallardo Heredia</div>
+
+  <div class="cover-section-title">Cliente / Caso de estudio</div>
+  <div class="cover-text">Distribuidora de Bolsas y Plásticos Desechables (Javier Morales)</div>
+
+  <div class="cover-section-title">Integrantes</div>
+  <div class="cover-text"><strong>Benjamin Benoni Santos Ojeda</strong> · Cloud Lead · matrícula 25460724</div>
+  <div class="cover-text"><strong>Juan Carrillo Orozco</strong> · Data Lead · matrícula 25460331</div>
+
+  <div class="cover-section-title" style="margin-top: 24px;">Alcance técnico de la Entrega E3</div>
+  <div class="cover-text" style="line-height: 1.45; text-align: justify;">
+    Esta entrega documenta la industrialización de PlastikTrack mediante Infraestructura como Código (IaC con Terraform en OCI Always Free), desacoplamiento de arquitectura monolítica a microservicios contenerizados (Docker y Docker Compose), orquestación y autoescalado horizontal en Kubernetes (K3s), e implementación de la API REST de Inferencia en FastAPI exponiendo el modelo <code>HistGradientBoostingRegressor</code> para forecasting y recomendaciones de aprovisionamiento a 14 días.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E3</span>
+    <span>1</span>
+  </div>
+</div>
+
+<!-- ==========================================
+     PÁGINA 2: ARQUITECTURA GENERAL Y MICROSERVICIOS
+     ========================================== -->
+<div class="page">
+  <h1 class="doc-header">E3 · Arquitectura de Microservicios y Contenedores</h1>
+  
+  <h2 class="sec-header">1. Justificación del Desacoplamiento (Microservicios vs Monolito)</h2>
+  <p>
+    En las fases E1 y E2, el motor analítico residía acoplado en un entorno de experimentación. Para garantizar escalabilidad operativa, disponibilidad continua y aislamiento de fallas, la arquitectura se divide en <strong>tres microservicios independientes</strong> comunicados mediante HTTP REST fuertemente tipado bajo contratos Pydantic v2.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Microservicio</th>
+        <th>Tecnología Base</th>
+        <th>Directorio</th>
+        <th>Puerto</th>
+        <th>Responsabilidad Operativa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>API Inferencia IA</strong></td>
+        <td>FastAPI + scikit-learn</td>
+        <td><code>services/modelos/</code></td>
+        <td><code>8000</code></td>
+        <td>Inferencia de demanda, backtesting y cálculo de compra sugerida a 14 días con stock de seguridad (95%).</td>
+      </tr>
+      <tr>
+        <td><strong>Dashboard Ejecutivo</strong></td>
+        <td>Streamlit + Plotly</td>
+        <td><code>services/tablero/</code></td>
+        <td><code>8501</code></td>
+        <td>Visualización de 4 KPIs, series temporales, matrices de correlación y visualización de inventarios.</td>
+      </tr>
+      <tr>
+        <td><strong>Worker / Ingesta</strong></td>
+        <td>Python Batch Engine</td>
+        <td><code>services/worker/</code></td>
+        <td>N/A</td>
+        <td>Ingesta periódica de ventas, validación de integridad y reentrenamiento programado de modelos.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e3_fig2_flujo_microservicios.png" alt="Microservicios Docker" style="max-height: 145px;">
+  </div>
+  <div class="chart-explanation">
+    <strong>Figura 1:</strong> Desacoplamiento de componentes bajo Docker Compose. El Tablero Streamlit consulta la API REST de inferencia a través de la red interna privada <code>plastiktrack-net</code>, aislando los puertos de cómputo del exterior.
+  </div>
+
+  <h2 class="sec-header">2. Principios de Seguridad y Hardening en Contenedores</h2>
+  <p>
+    Siguiendo las directrices del material de <em>Cómputo en la Nube</em>, las imágenes se construyen sobre <code>python:3.12-slim</code> para minimizar vulnerabilidades de SO y se ejecutan bajo el usuario no root <code>appuser</code> (UID 1001), impidiendo ataques de elevación de privilegios en el host.
+  </p>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E3</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- ==========================================
+     PÁGINA 3: INFRAESTRUCTURA COMO CÓDIGO (TERRAFORM)
+     ========================================== -->
+<div class="page">
+  <h1 class="doc-header">Infraestructura como Código con Terraform</h1>
+  
+  <h2 class="sec-header">3. Aprovisionamiento Declarativo en Oracle Cloud (OCI Always Free)</h2>
+  <p>
+    Toda la infraestructura cloud se administra mediante código declarativo en <code>infra/terraform/</code>, garantizando reproducibilidad absoluta, auditoría de cambios y despliegues sin intervención manual:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Recurso OCI</th>
+        <th>Tipo Terraform</th>
+        <th>Identificador / Nombre</th>
+        <th>Parámetros y Función</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Red Virtual</strong></td>
+        <td><code>oci_core_vcn</code></td>
+        <td><code>plastiktrack-vcn-prod</code></td>
+        <td>CIDR <code>10.0.0.0/16</code>, DNS label <code>plastiktrackvcn</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Internet Gateway</strong></td>
+        <td><code>oci_core_internet_gateway</code></td>
+        <td><code>plastiktrack-igw</code></td>
+        <td>Enrutamiento bidireccional hacia la tabla pública <code>0.0.0.0/0</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Subred Pública</strong></td>
+        <td><code>oci_core_subnet</code></td>
+        <td><code>publicsub</code></td>
+        <td>CIDR <code>10.0.1.0/24</code>, asignación automática de IP pública.</td>
+      </tr>
+      <tr>
+        <td><strong>Lista de Seguridad</strong></td>
+        <td><code>oci_core_security_list</code></td>
+        <td><code>plastiktrack-security-list</code></td>
+        <td>Filtrado por capas: 22 (SSH), 80/443 (Ingress), 8000 (API), 8501 (Tablero).</td>
+      </tr>
+      <tr>
+        <td><strong>Data Lake</strong></td>
+        <td><code>oci_objectstorage_bucket</code></td>
+        <td><code>datastartup-lake</code></td>
+        <td>Bucket en Querétaro con versionado para capas <code>raw/</code> y <code>clean/</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Instancia Clúster</strong></td>
+        <td><code>oci_core_instance</code></td>
+        <td><code>plastiktrack-k8s-node</code></td>
+        <td>Forma Ampere A1 (2 OCPUs, 12 GB RAM, Always Free) con Cloud-Init.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e3_fig1_arquitectura_cloud.png" alt="Arquitectura OCI" style="max-height: 150px;">
+  </div>
+  <div class="chart-explanation">
+    <strong>Figura 2:</strong> Topología de red y almacenamiento en Oracle Cloud Infrastructure (Querétaro). La instancia hospeda el motor K3s dentro de la subred pública protegida por reglas estrictas de ingreso.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E3</span>
+    <span>3</span>
+  </div>
+</div>
+
+<!-- ==========================================
+     PÁGINA 4: CONTENERIZACIÓN DOCKER Y COMPOSE
+     ========================================== -->
+<div class="page">
+  <h1 class="doc-header">Contenerización Docker y Orquestación Local</h1>
+  
+  <h2 class="sec-header">4. Especificación de Dockerfiles y Optimización de Imágenes</h2>
+  <p>
+    Se implementaron Dockerfiles específicos para cada microservicio. A continuación se presentan los fragmentos clave de la API de inferencia (<code>services/modelos/Dockerfile</code>) y la composición multi-contenedor (<code>docker-compose.yml</code>):
+  </p>
+
+  <div class="code-snippet">
+# services/modelos/Dockerfile (API Inferencia FastAPI)
+FROM python:3.12-slim AS base
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
+COPY services/modelos/modelo_demanda.joblib /app/services/modelos/modelo_demanda.joblib
+COPY services/modelos/api.py /app/services/modelos/api.py
+RUN useradd -m -u 1001 appuser && chown -R appuser:appuser /app
+USER appuser
+EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=5s CMD curl -f http://localhost:8000/health || exit 1
+CMD ["python", "-m", "uvicorn", "services.modelos.api:app", "--host", "0.0.0.0", "--port", "8000"]
+  </div>
+
+  <h2 class="sec-header">5. Orquestación Local Multicontenedor (docker-compose.yml)</h2>
+  <div class="code-snippet">
+version: '3.8'
+services:
+  api-modelos:
+    build: { context: ., dockerfile: services/modelos/Dockerfile }
+    ports: ["8000:8000"]
+    networks: [plastiktrack-net]
+    healthcheck: { test: ["CMD", "curl", "-f", "http://localhost:8000/health"], interval: 30s }
+    deploy: { resources: { limits: { cpus: '1.0', memory: 512M } } }
+  tablero:
+    build: { context: ., dockerfile: services/tablero/Dockerfile }
+    ports: ["8501:8501"]
+    depends_on: { api-modelos: { condition: service_healthy } }
+    networks: [plastiktrack-net]
+networks:
+  plastiktrack-net: { driver: bridge }
+  </div>
+
+  <div class="callout-box">
+    <strong>Garantía de Resiliencia:</strong> La directiva <code>depends_on</code> con condición <code>service_healthy</code> impide que el dashboard de Streamlit inicie antes de que el modelo de Machine Learning esté completamente cargado en memoria y respondiendo en <code>/health</code>.
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E3</span>
+    <span>4</span>
+  </div>
+</div>
+
+<!-- ==========================================
+     PÁGINA 5: KUBERNETES: DESPLIEGUE Y RECURSOS
+     ========================================== -->
+<div class="page">
+  <h1 class="doc-header">Orquestación en Kubernetes: Despliegue y Recursos</h1>
+  
+  <h2 class="sec-header">6. Manifiestos Declarativos en Namespace Dedicado</h2>
+  <p>
+    Para entornos de clúster gestionado o K3s, los manifiestos en <code>k8s/</code> establecen la configuración declarativa de alta disponibilidad:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Manifiesto</th>
+        <th>Objeto Kubernetes</th>
+        <th>Configuración Crítica</th>
+        <th>Propósito Operativo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>00-namespace.yaml</code></td>
+        <td><code>Namespace</code></td>
+        <td><code>name: plastiktrack</code></td>
+        <td>Aislamiento lógico, gobernanza y cuotas de consumo por proyecto.</td>
+      </tr>
+      <tr>
+        <td><code>01-configmap.yaml</code></td>
+        <td><code>ConfigMap</code></td>
+        <td><code>API_URL, OCI_REGION, BUCKET</code></td>
+        <td>Inyección de parámetros sin necesidad de recompilar imágenes de Docker.</td>
+      </tr>
+      <tr>
+        <td><code>02-api-deployment.yaml</code></td>
+        <td><code>Deployment</code></td>
+        <td>2 réplicas, RollingUpdate (0 unavail)</td>
+        <td>Despliegue del motor de IA con actualización continua sin caída de servicio.</td>
+      </tr>
+      <tr>
+        <td><code>03-api-service.yaml</code></td>
+        <td><code>Service</code></td>
+        <td><code>ClusterIP:8000</code></td>
+        <td>Balanceo de carga interno round-robin hacia los pods sanos de la API.</td>
+      </tr>
+      <tr>
+        <td><code>04-tablero-deployment.yaml</code></td>
+        <td><code>Deployment</code></td>
+        <td>1 réplica, probes <code>/_stcore/health</code></td>
+        <td>Despliegue del dashboard Streamlit con asignación de 256Mi a 512Mi.</td>
+      </tr>
+      <tr>
+        <td><code>05-tablero-service.yaml</code></td>
+        <td><code>Service</code></td>
+        <td><code>ClusterIP:8501</code></td>
+        <td>Punto de acceso interno para el tablero gerencial.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec-header">7. Estrategia de Sondas de Salud (Liveness y Readiness Probes)</h2>
+  <p>
+    Se desacoplaron las sondas para asegurar que ningún cliente reciba errores 502/503:
+  </p>
+  <ul>
+    <li><strong>Readiness Probe:</strong> Consulta <code>/health</code> cada 10s tras 10s de arranque inicial. Si el modelo aún no termina de deserializar <code>modelo_demanda.joblib</code>, el pod no recibe tráfico de la red.</li>
+    <li><strong>Liveness Probe:</strong> Verifica la vitalidad del proceso cada 20s. Si el servidor ASGI se bloquea, Kubernetes reinicia automáticamente el pod afectado.</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E3</span>
+    <span>5</span>
+  </div>
+</div>
+
+<!-- ==========================================
+     PÁGINA 6: INGRESS CONTROLLER Y AUTOESCALADO (HPA)
+     ========================================== -->
+<div class="page">
+  <h1 class="doc-header">Ruteo con Ingress y Autoescalado (HPA)</h1>
+  
+  <h2 class="sec-header">8. Enrutamiento HTTP Unificado (Ingress NGINX)</h2>
+  <p>
+    Mediante <code>k8s/06-ingress.yaml</code>, un único punto de entrada HTTP enruta el tráfico entrante según la ruta solicitada:
+    la raíz <code>/</code> se despacha hacia el <code>tablero-service:8501</code>, mientras que <code>/api/v1</code>, <code>/docs</code> y <code>/health</code> se dirigen hacia el <code>api-service:8000</code>.
+  </p>
+
+  <div class="chart-box">
+    <img src="file:///C:/Users/negro/Desktop/data-startup-plastiktrack/docs/img/e3_fig3_k8s_cluster.png" alt="Topología Kubernetes" style="max-height: 145px;">
+  </div>
+  <div class="chart-explanation">
+    <strong>Figura 3:</strong> Topología del clúster Kubernetes. El Ingress distribuye peticiones externas hacia los ClusterIP services y el HPA monitorea el consumo de CPU de la API de inferencia.
+  </div>
+
+  <h2 class="sec-header">9. Elasticidad con Horizontal Pod Autoscaler (HPA)</h2>
+  <p>
+    Para absorber picos de tráfico durante los cierres de quincena (+28% en demanda demostrada en E2), el manifiesto <code>k8s/07-hpa.yaml</code> ajusta automáticamente el número de réplicas de la API de inferencia entre <strong>2 y 6 pods</strong> al superar el 70% de consumo promedio de CPU:
+  </p>
+
+  <div class="code-snippet">
+# k8s/07-hpa.yaml (Autoescalador elástico de la API de IA)
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: api-modelos-hpa, namespace: plastiktrack }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: api-modelos-deployment }
+  minReplicas: 2
+  maxReplicas: 6
+  metrics:
+    - type: Resource
+      resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E3</span>
+    <span>6</span>
+  </div>
+</div>
+
+<!-- ==========================================
+     PÁGINA 7: ESPECIFICACIÓN DE LA API REST FASTAPI
+     ========================================== -->
+<div class="page">
+  <h1 class="doc-header">Especificación y Contratos de la API REST</h1>
+  
+  <h2 class="sec-header">10. Endpoints Oficiales de Inferencia (services/modelos/api.py)</h2>
+  <p>
+    La API REST expone de manera segura y tipada los algoritmos de pronóstico y optimización logística desarrollados en E2:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Método</th>
+        <th>Ruta</th>
+        <th>Esquema Entrada</th>
+        <th>Esquema Salida</th>
+        <th>Descripción y Métricas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/health</code></td>
+        <td>Ninguno</td>
+        <td><code>HealthResponse</code></td>
+        <td>Estado del servicio, uptime, versión <code>v1.0.0</code>, WAPE 12.29%, MAE 3.79 y latencia.</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/api/v1/skus</code></td>
+        <td>Ninguno</td>
+        <td><code>List[SKUInfo]</code></td>
+        <td>Catálogo de los 12 productos plásticos, familias y precios vigentes.</td>
+      </tr>
+      <tr>
+        <td><code>POST</code></td>
+        <td><code>/api/v1/predict</code></td>
+        <td><code>PredictRequest</code></td>
+        <td><code>PredictResponse</code></td>
+        <td>Predicción de demanda por SKU y fecha evaluando quincenas y días de reparto.</td>
+      </tr>
+      <tr>
+        <td><code>POST</code></td>
+        <td><code>/api/v1/replenish</code></td>
+        <td><code>ReplenishRequest</code></td>
+        <td><code>ReplenishResponse</code></td>
+        <td>Cálculo de compras a 14 días con stock de seguridad (95% nivel de servicio, Z=1.65).</td>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/metrics</code></td>
+        <td>Ninguno</td>
+        <td><code>text/plain</code></td>
+        <td>Métricas compatibles con Prometheus (uptime, WAPE, MAE y RMSE).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec-header">11. Motor de Decisión de Compras a 14 Días</h2>
+  <p>
+    El endpoint <code>/api/v1/replenish</code> ejecuta la lógica analítica de cadena de suministro sobre los 12 SKUs:
+  </p>
+  <p style="text-align: center; font-weight: bold; margin: 4px 0;">
+    $$\text{Stock de Seguridad} = Z \times \sigma_{\text{error}} \times \sqrt{14} \quad (Z = 1.65 \implies 95\% \text{ de nivel de servicio})$$
+  </p>
+  <p style="text-align: center; font-weight: bold; margin: 4px 0;">
+    $$\text{Pedido Sugerido} = \max(0, \text{Pronóstico a 14 días} + \text{Stock de Seguridad} - \text{Inventario Actual})$$
+  </p>
+
+  <div class="callout-box">
+    <strong>Resultado de Inferencia:</strong> Para un inventario en cero, el motor recomienda un aprovisionamiento total de <strong>5,498 bultos/cajas</strong> equivalentes a una inversión total de <strong>$232,548.00 MXN</strong>, mitigando el quiebre de stock en el producto líder (<em>Bolsa Negra Camiseta</em>, 728 unidades sugeridas).
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E3</span>
+    <span>7</span>
+  </div>
+</div>
+
+<!-- ==========================================
+     PÁGINA 8: AUDITORÍA DE PRUEBAS, OWASP Y FINOPS
+     ========================================== -->
+<div class="page">
+  <h1 class="doc-header">Auditoría de Pruebas, Seguridad y Cierre FinOps</h1>
+  
+  <h2 class="sec-header">12. Matriz de Validación Automatizada de Pruebas</h2>
+  <p>
+    La robustez de la solución se verificó mediante suites de pruebas automatizadas en <code>tests/</code>:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Archivo de Prueba</th>
+        <th>Pruebas Ejecutadas</th>
+        <th>Resultado</th>
+        <th>Detalle Validado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>test_api.py</code></td>
+        <td>8 pruebas unitarias</td>
+        <td><span class="badge badge-success">8/8 PASS (100%)</span></td>
+        <td>Validación de contratos Pydantic, respuestas 400 por SKU inválido, stock alto y endpoints de salud.</td>
+      </tr>
+      <tr>
+        <td><code>test_infra.py</code></td>
+        <td>4 pruebas de integración</td>
+        <td><span class="badge badge-success">4/4 PASS (100%)</span></td>
+        <td>Sintaxis de Dockerfiles, coherencia en <code>docker-compose.yml</code>, archivos Terraform y YAMLs k8s.</td>
+      </tr>
+      <tr>
+        <td><code>test_pipeline.py</code></td>
+        <td>3 pruebas de datos</td>
+        <td><span class="badge badge-success">3/3 PASS (100%)</span></td>
+        <td>Calidad del dataset limpio (16,428 registros, 0 nulos, 0 negativos y 0 duplicados).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec-header">13. Cumplimiento de OWASP API Security Top 10</h2>
+  <ul>
+    <li><strong>API1 (Broken Object Level Authorization):</strong> Filtrado estricto por SKU validado contra el catálogo oficial en memoria.</li>
+    <li><strong>API3 (Broken Object Property Level Authorization):</strong> Esquemas Pydantic con rechazo estricto de campos no declarados.</li>
+    <li><strong>API4 (Unrestricted Resource Consumption):</strong> Sondas de timeout (2-5s) y límites estrictos de CPU y memoria en Kubernetes.</li>
+  </ul>
+
+  <h2 class="sec-header">14. Balance FinOps y Compromiso de Costo Cero ($0.00 USD)</h2>
+  <p>
+    Todos los recursos aprovisionados operan estrictamente dentro de la capa <strong>Oracle Cloud Always Free</strong> (Ampere A1 Flex y Object Storage). La alerta de presupuesto mensual de <strong>$1.00 USD</strong> configurada en E0 permanece activa para prevenir cargos imprevistos.
+  </p>
+
+  <div style="margin-top: 25px; border-top: 1px solid #cbd5e1; padding-top: 10px; display: flex; justify-content: space-between;">
+    <div style="width: 48%; text-align: center;">
+      <div style="font-size: 8pt; color: #64748b;">Cloud Lead (Infraestructura y Nube)</div>
+      <div style="font-weight: 700; margin-top: 3px;">Benjamin Benoni Santos Ojeda</div>
+      <div style="font-size: 7.8pt; color: #334155;">No. Control: 25460724 · TecNM Campus Colima</div>
+    </div>
+    <div style="width: 48%; text-align: center;">
+      <div style="font-size: 8pt; color: #64748b;">Data Lead (Modelos y Analítica)</div>
+      <div style="font-weight: 700; margin-top: 3px;">Juan Carrillo Orozco</div>
+      <div style="font-size: 7.8pt; color: #334155;">No. Control: 25460331 · TecNM Campus Colima</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>PlastikTrack · E3</span>
+    <span>8</span>
+  </div>
+</div>
+
+</body>
+</html>
