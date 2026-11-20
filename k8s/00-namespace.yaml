@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: plastiktrack
+  labels:
+    app.kubernetes.io/name: plastiktrack
+    app.kubernetes.io/part-of: data-startup
+    environment: production

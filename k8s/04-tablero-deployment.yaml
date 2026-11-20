@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tablero-deployment
+  namespace: plastiktrack
+  labels:
+    app: tablero
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tablero
+  template:
+    metadata:
+      labels:
+        app: tablero
+        tier: frontend
+    spec:
+      containers:
+        - name: tablero
+          image: ghcr.io/benjamin-benoni-santos-ojeda/plastiktrack-tablero:v1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8501
+              name: http-tablero
+          envFrom:
+            - configMapRef:
+                name: plastiktrack-config
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            timeoutSeconds: 4
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 3
+            successThreshold: 1
+            failureThreshold: 2

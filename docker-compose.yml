@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # Microservicio 1: API REST de Inferencia y Pronóstico (FastAPI)
+  api-modelos:
+    build:
+      context: .
+      dockerfile: services/modelos/Dockerfile
+    container_name: plastiktrack-api-modelos
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - PYTHONUNBUFFERED=1
+      - ENV=production
+    networks:
+      - plastiktrack-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Microservicio 2: Tablero Empresarial Ejecutivo (Streamlit)
+  tablero:
+    build:
+      context: .
+      dockerfile: services/tablero/Dockerfile
+    container_name: plastiktrack-tablero
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://api-modelos:8000
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    depends_on:
+      api-modelos:
+        condition: service_healthy
+    networks:
+      - plastiktrack-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+networks:
+  plastiktrack-net:
+    driver: bridge
+    name: plastiktrack-net
